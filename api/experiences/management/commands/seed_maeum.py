@@ -52,6 +52,8 @@ CATEGORIES = [
      'description': '프라이빗 요트 차터 · 선셋 · 디너.'},
     {'code': 'equestrian', 'name_ko': '프라이빗 외승', 'name_en': 'Private Equestrian', 'icon': 'horse', 'display_order': 3,
      'description': '자연 속 프리미엄 야외 승마 세션.'},
+    {'code': 'kpop', 'name_ko': 'K-pop 컬처', 'name_en': 'K-pop Culture', 'icon': 'music', 'display_order': 4,
+     'description': '한국 엔터테인먼트 산업의 현장 — 스튜디오·레코딩·안무 세션.'},
 ]
 
 TAGS = [
@@ -70,6 +72,8 @@ VENDORS = [
      'address': '부산 해운대구', 'status': 'active', 'commission_rate': Decimal('22.00')},
     {'name': '제주 승마 리트릿', 'phone': '064-000-0003', 'email': 'ops@jeju-equestrian.example',
      'address': '제주시', 'status': 'active', 'commission_rate': Decimal('30.00')},
+    {'name': '서울 스튜디오 시그널', 'phone': '02-000-0004', 'email': 'ops@seoul-studio-signal.example',
+     'address': '서울 강남구 · 성수동', 'status': 'active', 'commission_rate': Decimal('28.00')},
 ]
 
 MEMBERSHIP_TIERS = [
@@ -135,6 +139,18 @@ EXPERIENCES = [
         'region_code': 'busan', 'category_code': 'yacht', 'vendor_name': '부산 블루 마리나',
         'base_price': 2_900_000, 'duration_minutes': 150, 'min_pax': 2, 'max_pax': 6,
         'tag_codes': ['luxury', 'private', 'romance'],
+    },
+
+    # 서울 K-pop
+    {
+        'slug': 'kpop-seoul-private-studio-session',
+        'title_ko': 'K-pop 서울 프라이빗 스튜디오 세션',
+        'title_en': 'K-pop Seoul Private Studio Session',
+        'subtitle_ko': '레코딩 · 안무 · 스타일링 — 하루 동안 아이돌의 리듬을',
+        'description_ko': '현역 K-pop 프로듀서·안무가와 함께하는 프라이빗 세션. 강남 녹음 스튜디오에서 나만의 한 트랙 레코딩, 성수동 댄스 스튜디오에서 안무 클래스, 메이크업·스타일링·프로 촬영까지 풀패키지.',
+        'region_code': 'seoul', 'category_code': 'kpop', 'vendor_name': '서울 스튜디오 시그널',
+        'base_price': 3_500_000, 'duration_minutes': 360, 'min_pax': 1, 'max_pax': 4,
+        'is_featured': True, 'tag_codes': ['luxury', 'private'],
     },
 
     # 제주 외승

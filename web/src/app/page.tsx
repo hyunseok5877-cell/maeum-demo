@@ -63,37 +63,6 @@ export default async function Home() {
           </p>
         </section>
 
-        {/* Featured */}
-        <section className="py-[120px] px-8 md:px-16 border-t border-line">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex justify-between items-end mb-16">
-              <div>
-                <p className="caption text-ink-muted mb-4">THIS WEEK · CURATED</p>
-                <h2
-                  className="font-[family-name:var(--font-serif)] text-ink"
-                  style={{ fontSize: "clamp(32px, 4vw, 56px)", lineHeight: 1.08, letterSpacing: "-0.02em" }}
-                >
-                  이 주의 큐레이션
-                </h2>
-              </div>
-              <Link href="/experiences" className="caption text-ink hover:opacity-70 transition">
-                전체 보기 →
-              </Link>
-            </div>
-            {featured.length === 0 ? (
-              <div className="py-16 text-center">
-                <p className="text-ink-muted">현재 공개된 경험이 없습니다.</p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {featured.map((exp) => (
-                  <ExperienceCard key={exp.id} exp={exp} />
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
-
         {/* Countries */}
         <section className="py-[120px] px-8 md:px-16 border-t border-line bg-muted-bg/40">
           <div className="max-w-7xl mx-auto">
@@ -143,6 +112,37 @@ export default async function Home() {
                 );
               })}
             </div>
+          </div>
+        </section>
+
+        {/* Featured */}
+        <section className="py-[120px] px-8 md:px-16 border-t border-line">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex justify-between items-end mb-16">
+              <div>
+                <p className="caption text-ink-muted mb-4">THIS WEEK · CURATED</p>
+                <h2
+                  className="font-[family-name:var(--font-serif)] text-ink"
+                  style={{ fontSize: "clamp(32px, 4vw, 56px)", lineHeight: 1.08, letterSpacing: "-0.02em" }}
+                >
+                  이 주의 큐레이션
+                </h2>
+              </div>
+              <Link href="/experiences" className="caption text-ink hover:opacity-70 transition">
+                전체 보기 →
+              </Link>
+            </div>
+            {featured.length === 0 ? (
+              <div className="py-16 text-center">
+                <p className="text-ink-muted">현재 공개된 경험이 없습니다.</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {featured.map((exp) => (
+                  <ExperienceCard key={exp.id} exp={exp} />
+                ))}
+              </div>
+            )}
           </div>
         </section>
       </main>
