@@ -91,12 +91,14 @@ test.describe("마음 (Maeum) — Smoke", () => {
 
   test("/experiences?region=seoul 필터 동작", async ({ page }) => {
     await page.goto("/experiences?region=seoul");
-    await expect(page.getByText(/REGION · seoul/i)).toBeVisible();
     // 서울 경험만 노출되어야 함 (람보르기니·페라리)
     await expect(page.locator('a[href*="ferrari-sunset-namsan"]')).toBeVisible();
     await expect(page.locator('a[href*="lamborghini-seoul-urban-drive"]')).toBeVisible();
     // 제주 경험은 노출되면 안 됨
     await expect(page.locator('a[href*="jeju-"]')).toHaveCount(0);
+    // 지역 배지·해제 링크 존재
+    await expect(page.getByText("SEOUL", { exact: true })).toBeVisible();
+    await expect(page.getByText(/지역 해제/)).toBeVisible();
   });
 
   test("퀴즈 API end-to-end — 제출·결과", async ({ request }) => {
@@ -123,6 +125,30 @@ test.describe("마음 (Maeum) — Smoke", () => {
     const data = await result.json();
     expect(data.result_type.code).toBe("NOCTURNE_LUXE");
     expect(data.recommended_experiences.length).toBeGreaterThan(0);
+  });
+
+  test("홈에 국가 섹션 + 한국 OPEN + 나머지 Coming Soon", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByRole("heading", { name: "국가를 먼저 고르세요." })).toBeVisible();
+    // 한국은 링크(OPEN)로 렌더 — /regions로 이동
+    const koreaLink = page.getByRole("link", { name: "한국" });
+    await expect(koreaLink).toBeVisible();
+    // 나머지는 Coming Soon
+    await expect(page.getByLabel("일본")).toBeVisible();
+    await expect(page.getByLabel("프랑스")).toBeVisible();
+    await expect(page.getByLabel("이탈리아")).toBeVisible();
+    // Coming Soon 라벨 노출 개수 = active 아닌 국가 수
+    const comingSoon = page.getByText("COMING SOON", { exact: true });
+    await expect(comingSoon.first()).toBeVisible();
+  });
+
+  test("카탈로그 탭 — 요트 선택 시 요트 경험만 노출", async ({ page }) => {
+    await page.goto("/experiences?category=yacht");
+    await expect(page.locator('a[href*="haeundae-private-yacht"]')).toBeVisible();
+    await expect(page.locator('a[href*="busan-night-yacht"]')).toBeVisible();
+    // 슈퍼카·외승은 없어야 함
+    await expect(page.locator('a[href*="lamborghini-"]')).toHaveCount(0);
+    await expect(page.locator('a[href*="jeju-private-equestrian"]')).toHaveCount(0);
   });
 
   test("큐레이션 요청 API — 게스트 접수", async ({ request }) => {

@@ -133,6 +133,36 @@ export async function getRegions(): Promise<RegionSummary[]> {
   }
 }
 
+export async function getCategories(): Promise<CategorySummary[]> {
+  try {
+    const data = await fetchJson<{ results: CategorySummary[] } | CategorySummary[]>(
+      "/experiences/categories/"
+    );
+    return Array.isArray(data) ? data : data.results ?? [];
+  } catch {
+    return [];
+  }
+}
+
+export interface CountrySummary {
+  code: string;
+  name_ko: string;
+  name_en: string;
+  is_active: boolean;
+  display_order: number;
+}
+
+export async function getCountries(): Promise<CountrySummary[]> {
+  try {
+    const data = await fetchJson<{ results: CountrySummary[] } | CountrySummary[]>(
+      "/experiences/countries/"
+    );
+    return Array.isArray(data) ? data : data.results ?? [];
+  } catch {
+    return [];
+  }
+}
+
 export async function getExperienceBySlug(slug: string): Promise<ExperienceDetail | null> {
   try {
     return await fetchJson<ExperienceDetail>(`/experiences/${slug}/`);

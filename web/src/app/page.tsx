@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getFeaturedExperiences } from "@/lib/api";
+import { getFeaturedExperiences, getCountries } from "@/lib/api";
 import { ExperienceCard } from "@/components/ExperienceCard";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 export const revalidate = 60;
 
 export default async function Home() {
-  const featured = await getFeaturedExperiences();
+  const [featured, countries] = await Promise.all([getFeaturedExperiences(), getCountries()]);
 
   return (
     <>
@@ -91,6 +91,58 @@ export default async function Home() {
                 ))}
               </div>
             )}
+          </div>
+        </section>
+
+        {/* Countries */}
+        <section className="py-[120px] px-8 md:px-16 border-t border-line bg-muted-bg/40">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-16">
+              <p className="caption text-ink-muted mb-4">BY COUNTRY · WORLDWIDE</p>
+              <h2
+                className="font-[family-name:var(--font-serif)] text-ink"
+                style={{ fontSize: "clamp(32px, 4vw, 56px)", lineHeight: 1.08, letterSpacing: "-0.02em" }}
+              >
+                국가를 먼저 고르세요.
+              </h2>
+              <p className="mt-6 max-w-2xl text-[16px] text-ink-muted leading-[1.6]">
+                마음은 한국에서 시작해 전 세계로 확장됩니다.
+                지금은 대한민국만 열려 있습니다.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {countries.map((c) => {
+                const content = (
+                  <div
+                    className={`flex flex-col items-center justify-center aspect-[3/4] border transition ${
+                      c.is_active
+                        ? "border-ink bg-surface hover:bg-ink hover:text-ink-inverse cursor-pointer"
+                        : "border-line bg-transparent text-ink-muted/60 cursor-not-allowed"
+                    }`}
+                  >
+                    <span
+                      className="font-[family-name:var(--font-serif)]"
+                      style={{ fontSize: "40px", letterSpacing: "-0.02em" }}
+                    >
+                      {c.name_ko}
+                    </span>
+                    <span className="caption mt-3 opacity-70">{c.code}</span>
+                    <span className={`caption mt-6 ${c.is_active ? "" : "opacity-50"}`}>
+                      {c.is_active ? "OPEN" : "COMING SOON"}
+                    </span>
+                  </div>
+                );
+                return c.is_active ? (
+                  <Link key={c.code} href="/regions" aria-label={c.name_ko}>
+                    {content}
+                  </Link>
+                ) : (
+                  <div key={c.code} aria-label={c.name_ko}>
+                    {content}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </section>
       </main>

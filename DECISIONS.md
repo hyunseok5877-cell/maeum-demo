@@ -186,6 +186,7 @@
 | v0.6 | 2026-04-24 | Django 29개 모델 전체 구현 (accounts 신규 6 + experiences 12 + bookings 4 + curation 9). 어드민 자동등록·시드 데이터·수퍼유저 생성. 홈 헤더 MAEUM 텍스트 제거 | snapshot |
 | v0.7 | 2026-04-24 | 상품 필드 확장·파일업로드·Summernote 리치 에디터. H API 연결·I Playwright+CI 완료 | snapshot |
 | v0.8 | 2026-04-24 | 카탈로그 + 경험 상세 페이지. SiteHeader/Footer 분리. Turbopack→Webpack. RAG·결제 = 최후 순위 규칙 | snapshot |
-| **v0.9** | **2026-04-24** | **L·M·N 완료 — 성향테스트(6문항·4유형 스코어링·결과·추천) / 큐레이션 문의 3-step 폼(게스트 접수) / 지역 페이지(대형 세리프 카드·Coming Soon 칩) + 카탈로그 region/category 필터. E2E 14/14 통과** | **current** |
+| v0.9 | 2026-04-24 | L·M·N 완료 — 퀴즈/큐레이션 문의/지역 페이지 + 카탈로그 필터. E2E 14/14 | snapshot |
+| **v0.10** | **2026-04-24** | **카탈로그 레이아웃 변경 — 카테고리 탭(전체·슈퍼카·요트·외승) 방식으로 전환. 홈에 BY COUNTRY 섹션 추가 — 한국 OPEN + 일본·중국·미국·프랑스·이탈리아 Coming Soon. 시드에 프랑스·이탈리아 추가. E2E 16/16 통과** | **current** |
 
 **롤백 방법**: 오너가 "v0.2로 롤백" 요청 시 → 본 파일에서 v0.3 변경분을 되돌리고 v0.2 상태로 재기록. CHANGELOG.md에 롤백 이벤트 append.

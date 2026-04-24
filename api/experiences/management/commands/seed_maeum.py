@@ -30,6 +30,8 @@ COUNTRIES = [
     {'code': 'JP', 'name_ko': '일본', 'name_en': 'Japan', 'is_active': False, 'display_order': 2},
     {'code': 'CN', 'name_ko': '중국', 'name_en': 'China', 'is_active': False, 'display_order': 3},
     {'code': 'US', 'name_ko': '미국', 'name_en': 'United States', 'is_active': False, 'display_order': 4},
+    {'code': 'FR', 'name_ko': '프랑스', 'name_en': 'France', 'is_active': False, 'display_order': 5},
+    {'code': 'IT', 'name_ko': '이탈리아', 'name_en': 'Italy', 'is_active': False, 'display_order': 6},
 ]
 
 REGIONS = [
