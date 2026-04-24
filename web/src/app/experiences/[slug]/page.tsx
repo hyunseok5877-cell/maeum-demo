@@ -298,22 +298,20 @@ export default async function ExperienceDetail({
           </section>
         )}
 
-        {/* Final CTA */}
-        <section className="px-8 md:px-16 py-[120px] border-t border-line bg-obsidian">
-          <div className="max-w-3xl mx-auto text-center">
+        {/* Add-on CTA (2-depth) */}
+        <section className="px-8 md:px-16 py-16 md:py-20 border-t border-line bg-obsidian">
+          <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <p
-              className="font-[family-name:var(--font-serif)] text-ink-inverse mb-12"
-              style={{ fontSize: "clamp(32px, 5vw, 56px)", lineHeight: 1.12, letterSpacing: "-0.01em" }}
+              className="font-[family-name:var(--font-serif)] text-ink-inverse"
+              style={{ fontSize: "clamp(20px, 2.4vw, 28px)", lineHeight: 1.35, letterSpacing: "-0.005em" }}
             >
-              이 경험이
-              <br />
-              당신의 마음에 닿기를.
+              해당 일정에 추가하고 싶은 컨텐츠가 있을까요?
             </p>
             <Link
               href="/request-curation"
-              className="inline-flex h-[60px] px-12 items-center justify-center bg-ink-inverse text-ink font-medium hover:bg-white transition"
+              className="inline-flex h-[48px] px-8 items-center justify-center bg-ink-inverse text-ink font-medium hover:bg-white transition whitespace-nowrap"
             >
-              큐레이션 시작하기
+              큐레이션 요청하기
             </Link>
           </div>
         </section>
