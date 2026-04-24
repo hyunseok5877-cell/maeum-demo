@@ -35,6 +35,8 @@ class Booking(TimestampedModel):
     cancel_reason = models.TextField(blank=True, default='')
 
     class Meta:
+        verbose_name = '예약'
+        verbose_name_plural = '예약'
         ordering = ['-created_at']
         indexes = [
             models.Index(fields=['user', 'status']),
@@ -56,6 +58,10 @@ class BookingItem(TimestampedModel):
     quantity = models.IntegerField(default=1)
     unit_price = money_field()
     subtotal = money_field()
+
+    class Meta:
+        verbose_name = '예약 라인'
+        verbose_name_plural = '예약 라인'
 
     def __str__(self):
         return f'{self.booking} · {self.experience}'
@@ -88,6 +94,10 @@ class Payment(TimestampedModel):
     refunded_at = models.DateTimeField(null=True, blank=True)
     receipt_url = models.URLField(blank=True, default='')
 
+    class Meta:
+        verbose_name = '결제'
+        verbose_name_plural = '결제'
+
     def __str__(self):
         return f'{self.booking} · {self.status} · {self.amount}'
 
@@ -112,6 +122,10 @@ class Refund(TimestampedModel):
     provider_refund_id = models.CharField(max_length=100, blank=True, default='')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='requested')
     completed_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        verbose_name = '환불'
+        verbose_name_plural = '환불'
 
     def __str__(self):
         return f'Refund {self.amount} · {self.status}'

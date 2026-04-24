@@ -1,9 +1,38 @@
 # 07. 브랜드 무드보드 (Brand Moodboard)
 
 > 프로젝트: **마음 (Maeum)**
-> 버전: v0.1 (2026-04-24)
-> 무드 키워드: **모던 미니멀 · 절제된 럭셔리 · 한국적 감각**
+> 버전: **v0.2 (2026-04-24)** — 시네마틱 레이어 합류
+> 무드 키워드: **모던 미니멀 × 시네마틱 럭셔리 · 한국적 감각**
 > 주의: 본 문서는 `DECISIONS.md` §🎨 브랜드 무드 섹션의 상세 전개.
+
+---
+
+## 0-1. v0.2 변경 요약 (Capitolium 톤 병합)
+
+v0.1의 "고요한 미니멀" 골격은 유지하되, 프리미엄 경험 상품(슈퍼카·요트·외승, 객단가 300만원)에 어울리는 **시네마틱 스토리텔링**을 한 겹 덧댐. 참고 레퍼런스: `collabcapitolium.fr` (프랑스 럭셔리 스포츠 협업 사이트).
+
+| 축 | v0.1 | v0.2 (변경/추가) |
+|---|---|---|
+| 액센트 컬러 | 없음 | **Antique Brass `#8A7445` 1종 해금** (금색 '그라데이션'은 여전히 금지) |
+| Display 폰트 | EB Garamond 단독 | **Playfair Display** Primary + EB Garamond는 에디토리얼 본문용으로 후퇴 |
+| 캡션 tracking | 0.04em | **0.18em** (프렌치 에디토리얼 톤) |
+| 섹션 padding-y | 120/80/64 | **160/100/72** (더 큰 여백) |
+| 섹션 구조 | 단순 섹션 | **Chapitre I·II·III 넘버링 + 불어 섹션 라벨** (Sentiment·Territoire·Cette semaine) |
+| 구분선 | 단순 1px line | **대리석 hairline divider** (Brass 그라데이션 + 마름모 2개) |
+| 모션 | 200~400ms 잔잔 | + **1200ms 시네마틱 페이드 60px** · IntersectionObserver reveal · 마퀴 40s |
+| 타이틀 | 단색 | **골드 stroke trail** (trail-ghost 레이어, -6px 오프셋) |
+| CTA | 직각 단순 | + **Entrer-style cinematic button** (호버 시 텍스트 위 스와이프) |
+| 다크 섹션 배경 | Obsidian `#0F0F0F` | **Espresso `#2B2420`도 허용** (풀블랙보다 따뜻) |
+| 아이보리 배경 | Ivory White `#FAFAF8` | + **Warm Ivory `#F5F1EA`** (장문·에디토리얼 섹션) |
+| 비디오 | 히어로 루프만 | + **Scrub video 1회 허용** (데스크톱만, 모바일 이미지 폴백) |
+
+### 유지되는 v0.1 원칙 (바뀌지 않음)
+- 여백이 장식 · 무채색 기본 · 이미지>문장 · 한 페이지 3단계 위계
+- 중앙정렬 폼 금지 · 이모지 금지 · 3D/뉴모피즘 금지
+- **금색 그라데이션 금지** (단색 Brass는 OK)
+- "여행·투어·관광" 단어 금지
+
+---
 
 ---
 
@@ -71,6 +100,16 @@ Phase 1은 액센트 없이 시작. 필요시 1개만 채택. 여러 개 금지.
 
 **→ v0.1 결정**: 액센트 없음. 사진 안의 자연스러운 색만으로 충분. 3개월 운영 후 재검토.
 
+**→ v0.2 결정 (2026-04-24)**: **Antique Brass `#8A7445` 1종 해금**. 용도:
+- 섹션 챕터 넘버링 · "Chapitre I / II / III" 라벨
+- 텍스트 stroke trail (대형 헤드라인 뒷면 레이어, -6px 오프셋)
+- 대리석 hairline divider (Brass 그라데이션)
+- 마퀴 상·하단 1px 라인
+- 호버 시 링크 하이라이트
+- Focus ring
+
+**금지 유지**: 금색 **그라데이션**, 여러 액센트 동시 사용, 형광·메탈릭 골드.
+
 ### 3.4 System (유틸)
 
 | 이름 | HEX | 용도 |
@@ -93,6 +132,8 @@ Phase 1은 액센트 없이 시작. 필요시 1개만 채택. 여러 개 금지.
 | Numeric | **Inter Tabular** | — | 가격·예약번호 tabular-nums |
 
 **권고**: Phase 1은 무료 조합으로 시작. `EB Garamond + Pretendard + Inter`.
+
+**→ v0.2 갱신**: Display 1순위를 **Playfair Display** (Google, 무료)로 교체. Didone에 가까운 대비로 시네마틱 대형 헤드라인에 유리. EB Garamond는 `.prose-maeum` 에디토리얼 본문·블로그 스타일 content_html에만 사용. 이탤릭은 Playfair italic으로 인용구·챕터 라벨에 적극 사용.
 
 ### 4.2 타입 스케일 (Tailwind 커스텀)
 

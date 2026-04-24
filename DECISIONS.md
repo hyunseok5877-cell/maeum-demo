@@ -6,7 +6,7 @@
 >
 > **롤백 규칙**: 이 파일 하단 "체크포인트" 목록에서 원하는 버전 번호(e.g. v0.3)를 지정하면, 그 상태로 전체 결정을 되돌린다.
 >
-> 최종 갱신: **2026-04-24** / 현재 버전: **v0.3**
+> 최종 갱신: **2026-04-24** / 현재 버전: **v0.14** 🔒 LOCKED HERO SNAPSHOT
 
 ---
 
@@ -37,15 +37,24 @@
 
 ---
 
-## 🎨 브랜드 무드
+## 🎨 브랜드 무드 (v0.13 갱신)
 
 | 항목 | 결정 |
 |---|---|
-| **무드 키워드** | **모던 미니멀** |
-| 레퍼런스 | Rimowa, Aesop, Jil Sander, Black Tomato |
-| ❌ 지양 | 과장된 블랙골드, 샤넬식 장식, 에어비앤비 따뜻함 |
-| 타이포 | 세리프 대형 헤드라인 + 산세리프 본문 (여백 넉넉) |
-| 컬러 | 오프화이트 배경 + 진회색 텍스트 + 작은 액센트 컬러 1개 |
+| **무드 키워드** | **모던 미니멀 × 시네마틱 럭셔리** |
+| 레퍼런스 (미니멀 뼈대) | Aesop · Jil Sander · Rimowa · Black Tomato |
+| 레퍼런스 (시네마틱 레이어) | **Capitolium (collabcapitolium.fr)** · Aman · Hermès |
+| ❌ 지양 | 샤넬식 과시 장식, 금색 **그라데이션**, 에어비앤비 따뜻함, 풀블랙 장례식 톤 |
+| 타이포 Display | **Playfair Display** (Primary) + EB Garamond(에디토리얼 본문) |
+| 타이포 Body | Inter + Pretendard |
+| 컬러 기본 | Ivory `#FAFAF8` / Warm Ivory `#F5F1EA` / Ink `#1A1A1A` / Line `#E6E4DE` |
+| 컬러 다크 | Obsidian `#0F0F0F` · **Espresso `#2B2420`** (따뜻한 다크) |
+| **액센트** | **Antique Brass `#8A7445` 1종 해금** (v0.13 / v0.1~0.12까지는 액센트 없음이었음) — 단색 전용, 그라데이션 금지 |
+| 섹션 구조 | **Chapitre I·II·III 넘버링** + 불어 섹션 라벨 (Sentiment / Territoire / Cette semaine) |
+| 구분선 | 대리석 hairline divider (Brass 그라데이션 + 마름모 2개) |
+| 캡션 tracking | **0.18em** (프렌치 에디토리얼 톤, v0.1의 0.04em → 조정) |
+| 섹션 padding-y | **160/100/72** (데스크/태블/모바일) |
+| 모션 | 잔잔한 1200ms 페이드 60px + Intersection reveal + 마퀴 40s · scrub video 1회 허용(데스크탑 only) |
 
 ---
 
@@ -189,6 +198,8 @@
 | v0.9 | 2026-04-24 | L·M·N 완료 — 퀴즈/큐레이션 문의/지역 페이지 + 카탈로그 필터. E2E 14/14 | snapshot |
 | v0.10 | 2026-04-24 | 카탈로그 탭 방식 전환, 홈 BY COUNTRY 섹션 추가. E2E 16/16 | snapshot |
 | v0.11 | 2026-04-24 | 홈 섹션 순서(감정→국가→큐레이션), K-pop 컬처 + K-pop 스튜디오 경험 | snapshot |
-| **v0.12** | **2026-04-24** | **소셜 프루프 티커 위젯 (좌하단 플로팅, 마스킹 ID ab**cd, 4.5초 로테이션, × 닫기 · localStorage 기억). /api/bookings/recent/ + 데모 예약 12건·유저 7명 시드. 상세 CTA "해당 일정에 추가하고 싶은 컨텐츠" 축소. E2E 18/18** | **current** |
+| v0.12 | 2026-04-24 | 소셜 프루프 티커 위젯 (좌하단 플로팅, 마스킹 ID ab**cd, 4.5초 로테이션, × 닫기 · localStorage 기억). /api/bookings/recent/ + 데모 예약 12건·유저 7명 시드. 상세 CTA "해당 일정에 추가하고 싶은 컨텐츠" 축소. E2E 18/18 | snapshot |
+| v0.13 | 2026-04-24 | 브랜드 무드 확장 — "모던 미니멀 × 시네마틱 럭셔리". Antique Brass `#8A7445` 액센트 1종 해금 (그라데이션은 여전히 금지). Playfair Display Display Primary 교체 (EB Garamond는 에디토리얼 본문 용도). Espresso `#2B2420` / Warm Ivory `#F5F1EA` 추가. 섹션 구조 Chapitre I·II·III 불어 라벨 도입. 대리석 hairline divider / 마퀴 40s / trail-ghost 골드 stroke / Entrer-style cinematic button / 1200ms reveal. 홈 페이지 전체 리디자인. design-tokens.json v0.2 / globals.css / Reveal 컴포넌트 추가 | snapshot |
+| **v0.14** 🔒 | **2026-04-24** | **carlesfaus.com 패턴 Infinite Scroll Hero 완성 (오너 LOCKED). 홈 = SiteHeader + InfiniteLoopHero + SiteFooter 만. 배경: "경험을 재설계하다." position: fixed 뷰포트 중앙 영구 고정 (검정, 흰 배경). 전경: 150vh 블록 × 절대좌표 이미지 6장, 3패턴 순환, 무한 append(≤60블록). 이미지 7종 실존 slug 전부 Link 연결. 3중 백업: Git tag `v0.14-hero-locked` + `.backups/v0.14-hero-infinite-loop/` + 본 DECISIONS/CHANGELOG. 롤백 절차는 CHANGELOG v0.14 §🔙 참조** | **current (LOCKED)** |
 
 **롤백 방법**: 오너가 "v0.2로 롤백" 요청 시 → 본 파일에서 v0.3 변경분을 되돌리고 v0.2 상태로 재기록. CHANGELOG.md에 롤백 이벤트 append.

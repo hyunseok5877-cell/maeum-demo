@@ -8,6 +8,142 @@
 
 ---
 
+## [v0.14] — 2026-04-24 — 🔒 **LOCKED HERO SNAPSHOT**
+
+### 확정 — carlesfaus.com 패턴 Infinite Scroll Hero (오너 요청, 최종)
+
+> **이 버전은 오너가 "엄청 힘들게 만든" 디자인. 건드리기 전 반드시 이 스냅샷으로 롤백 가능하도록 세 방식으로 보존.**
+
+### 구조
+- 홈 (`/`) = `SiteHeader` + `InfiniteLoopHero` + `SiteFooter` 만. Chapitre I·II·III·Marquee·Closing 전부 제거
+- **배경 텍스트**: "경험을 재설계하다." (한글 검정) + italic "Imagination, Made Real." — `position: fixed`로 뷰포트 중앙에 영구 고정. 스크롤·ancestor overflow 영향 0. 히어로 섹션이 뷰포트 밖이면 IntersectionObserver가 opacity 페이드 (SiteFooter와 겹침 방지)
+- **이미지 블록**: 150vh 세로 블록 안에 절대 좌표로 이미지 6장 흩뿌림. 3개 패턴(A/B/C) 순환
+- **무한 스크롤**: 초기 5블록(≈750vh), 마지막 sentinel 진입 시 IntersectionObserver가 2블록씩 append (상한 60)
+- **각 이미지 = `<Link>`**: 7개 실존 Experience slug 전부 연결 (`lamborghini-seoul-urban-drive` · `ferrari-sunset-namsan` · `busan-haeundae-private-yacht-sunset` · `busan-night-yacht-champagne` · `jeju-private-equestrian-oreum` · `jeju-beach-equestrian-sunset` · `kpop-seoul-private-studio-session`)
+- **호버**: 이미지 background-size 110→126% 줌 + 하단 검정 그라데이션 페이드 + 캡션 슬라이드업
+
+### 주요 파일 (이 스냅샷의 "진짜")
+```
+web/src/app/page.tsx
+web/src/app/layout.tsx            (Playfair_Display next/font)
+web/src/app/globals.css           (.scroll-hero, .sc-text-fixed, .sc-img 등)
+web/src/components/InfiniteLoopHero.tsx
+web/src/components/SiteHeader.tsx (88px, Playfair Maeum 워드마크, 불어 메뉴)
+design-tokens.json                (v0.2 — Brass 해금, Playfair Primary)
+```
+
+### 3중 보존
+1. **Git tag**: `v0.14-hero-locked` — 정확히 이 commit 가리킴
+2. **물리 백업**: `.backups/v0.14-hero-infinite-loop/` 에 위 6개 파일 원본 복사본
+3. **문서**: 본 CHANGELOG 엔트리 + DECISIONS v0.14
+
+### 🔙 롤백 방법 (가장 안전한 → 덜 안전한 순)
+
+**방법 1 — Git tag 체크아웃 (추천, 전체 레포 복원)**
+```bash
+cd ~/Desktop/경험플랫폼
+git fetch --tags
+git checkout v0.14-hero-locked -- web/src/app/page.tsx web/src/app/layout.tsx web/src/app/globals.css web/src/components/InfiniteLoopHero.tsx web/src/components/SiteHeader.tsx design-tokens.json
+```
+위 명령은 지정 파일만 tag 시점으로 되돌림. 다른 파일은 그대로.
+
+**전체 레포를 통째로 tag 시점으로 되돌리려면**:
+```bash
+git checkout v0.14-hero-locked
+# 또는 별도 브랜치로
+git checkout -b rollback-to-v0.14 v0.14-hero-locked
+```
+
+**방법 2 — 물리 백업에서 수동 복원**
+```bash
+cp ~/Desktop/경험플랫폼/.backups/v0.14-hero-infinite-loop/page.tsx ~/Desktop/경험플랫폼/web/src/app/page.tsx
+cp ~/Desktop/경험플랫폼/.backups/v0.14-hero-infinite-loop/globals.css ~/Desktop/경험플랫폼/web/src/app/globals.css
+cp ~/Desktop/경험플랫폼/.backups/v0.14-hero-infinite-loop/InfiniteLoopHero.tsx ~/Desktop/경험플랫폼/web/src/components/InfiniteLoopHero.tsx
+cp ~/Desktop/경험플랫폼/.backups/v0.14-hero-infinite-loop/SiteHeader.tsx ~/Desktop/경험플랫폼/web/src/components/SiteHeader.tsx
+cp ~/Desktop/경험플랫폼/.backups/v0.14-hero-infinite-loop/layout.tsx ~/Desktop/경험플랫폼/web/src/app/layout.tsx
+cp ~/Desktop/경험플랫폼/.backups/v0.14-hero-infinite-loop/design-tokens.json ~/Desktop/경험플랫폼/design-tokens.json
+```
+
+**롤백 후 실행**
+```bash
+cd ~/Desktop/경험플랫폼/web
+npm run build
+npm run dev
+```
+
+### 결정자: 오너 지시, AI 실행
+
+---
+
+## [v0.13] — 2026-04-24
+
+### 확정 — 브랜드 무드 확장 (오너 방향 전환 지시)
+
+- **무드 키워드**: "모던 미니멀" → **"모던 미니멀 × 시네마틱 럭셔리"**
+  - Before (v0.4~v0.12): Aesop/Jil Sander 뼈대, 액센트 없음, EB Garamond 단독
+  - After (v0.13): 같은 뼈대 유지 + Capitolium(collabcapitolium.fr) 레퍼런스의 시네마틱 스토리텔링 레이어 덧댐
+  - 이유: 오너 지시 — "디자인 퀄리티가 다르다. 영화적 몰입감 필요. 단, 금액 관련(객단가 300만원) 상품은 유지"
+  - 결정자: 오너 지시 + AI 실행
+
+### 디자인 토큰 v0.2
+- **액센트**: **Antique Brass `#8A7445`** 1종 해금 (v0.1~0.12는 액센트 없음)
+  - 용도: 챕터 넘버링·trail stroke·대리석 divider·마퀴 라인·링크 호버·focus ring
+  - 금지 유지: 금색 **그라데이션**, 여러 액센트 동시 사용, 형광·메탈릭 골드
+- **Display 폰트**: Playfair Display Primary 교체 + italic 적극 사용. EB Garamond는 `.prose-maeum` 에디토리얼 본문으로 후퇴
+- **다크 배경 선택지 추가**: Espresso `#2B2420` (풀블랙보다 따뜻). 히어로·닫는 섹션은 Espresso 기본
+- **아이보리 선택지 추가**: Warm Ivory `#F5F1EA` (장문 섹션)
+- **캡션 tracking**: 0.04em → **0.18em** (프렌치 에디토리얼 톤)
+- **섹션 padding-y**: 120/80/64 → **160/100/72**
+- **히어로 폰트 사이즈**: `clamp(56px, 10vw, 128px)` 신설
+- **모션**: `reveal` 유틸 (1200ms 페이드 60px, IntersectionObserver) · `marquee-scroll` 40s · 시네마틱 이징 `cubic-bezier(0.25, 0.1, 0.25, 1)`
+
+### 신규 컴포넌트·유틸 (globals.css)
+- `.chapter-number` — 골드 이탤릭 챕터 라벨 (Chapitre I — Sentiment 등)
+- `.chapter-title` + `.trail-wrap / .trail-ghost` — 골드 stroke trail 레이어 (본체 뒤 -6px 어긋남)
+- `.marble-divider` — Brass 그라데이션 1px 라인 + 마름모 2개 장식
+- `.marquee` / `.marquee-track` — 40s 무한 스크롤 이탤릭 워드마크
+- `.btn-cinematic` — Entrer-style 호버 텍스트 위 스와이프 버튼
+- `.reveal` / `.is-in` — 뷰포트 진입 시 1200ms 페이드인 (글로벌 메모리 규칙: 등장 애니메이션은 뷰포트 진입 시에만 실행)
+
+### 신규 React 컴포넌트
+- `web/src/components/Reveal.tsx` — IntersectionObserver로 `.is-in` 토글. `prefers-reduced-motion` 대응
+
+### 홈 페이지 전체 리디자인 (`web/src/app/page.tsx`)
+- 히어로: Espresso 배경 + 배경 이미지 + 그라데이션 오버레이 + 챕터 넘버링(— Ouverture) + trail stroke 타이틀 + Entrer-style CTA + 좌하단 중개업 고지 + 우하단 SCROLL 힌트
+- Chapitre I — Sentiment (감정 스테이트먼트) — Warm Ivory 배경 + italic Brass 하이라이트 + 대리석 divider
+- Marquee — Supercar · Yacht · Private Equestrian · K-pop Studio
+- Chapitre II — Territoire (By Country) — 12컬럼 그리드, 1px gap에 Line 색 깔아 hairline 격자, Ouvert/Bientôt 라벨
+- Chapitre III — Cette semaine (이 주의 큐레이션) — Espresso 다크 섹션 + trail 타이틀 + 카드 stagger 120ms
+- Closing — Fin du prologue + 인용문 + Entrer CTA
+
+### 헤더 (`SiteHeader.tsx`)
+- 높이 72 → 88px
+- 로고 옆 "Maeum" Playfair italic 워드마크 병기
+- 메뉴 4개 불어 변형: Experiences · Territoire · Sentiment · Curation
+- 호버 시 Brass 전환
+
+### layout.tsx
+- `Playfair_Display` next/font 추가 (weight 400·500·700·900, italic 포함)
+- `--font-playfair` CSS 변수 노출
+
+### 유지 (바뀌지 않음)
+- "여행·투어·관광" 단어 금지
+- 가격·벤더 확정은 오너만
+- 프라이빗 셰프·소개팅 상품화 금지
+- RAG·TossPayments 최후순위
+- 모든 문서 CHANGELOG append-only
+- 중앙정렬 폼 금지 · 이모지 금지 · 3D/뉴모피즘 금지
+
+### TODO (후속)
+- [ ] 히어로 실제 영상(.mp4/.webm) 소싱·교체
+- [ ] Scrub video 섹션 1회 (슈퍼카 or 요트) — GSAP ScrollTrigger
+- [ ] E2E 기존 18개 회귀 확인 (금지어·디스카운트 배지·ticker)
+- [ ] /experiences · /experiences/[slug] · /quiz · /regions · /request-curation 페이지도 동일 톤으로 순차 이식
+
+### 결정자: 오너 지시 + AI 실행
+
+---
+
 ## [v0.12] — 2026-04-24
 
 ### 최근 예약 소셜 프루프 위젯 (오너 요청)

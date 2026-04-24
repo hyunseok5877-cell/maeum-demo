@@ -13,6 +13,8 @@ class Country(TimestampedModel):
     display_order = models.IntegerField(default=0)
 
     class Meta:
+        verbose_name = '국가'
+        verbose_name_plural = '국가'
         ordering = ['display_order', 'code']
 
     def __str__(self):
@@ -36,6 +38,8 @@ class Region(TimestampedModel):
     display_order = models.IntegerField(default=0)
 
     class Meta:
+        verbose_name = '지역'
+        verbose_name_plural = '지역'
         unique_together = [('country', 'code')]
         ordering = ['display_order', 'code']
 
@@ -54,8 +58,9 @@ class Category(TimestampedModel):
     display_order = models.IntegerField(default=0)
 
     class Meta:
+        verbose_name = '카테고리'
+        verbose_name_plural = '카테고리'
         ordering = ['display_order', 'code']
-        verbose_name_plural = 'Categories'
 
     def __str__(self):
         return self.name_ko
@@ -66,6 +71,10 @@ class Tag(TimestampedModel):
 
     code = models.CharField(max_length=30, unique=True)
     name_ko = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name = '태그'
+        verbose_name_plural = '태그'
 
     def __str__(self):
         return self.name_ko
@@ -90,6 +99,10 @@ class Vendor(TimestampedModel):
     bank_account = models.CharField(max_length=200, blank=True, default='', help_text='암호화 대상')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
 
+    class Meta:
+        verbose_name = '공급사 (벤더)'
+        verbose_name_plural = '공급사 (벤더)'
+
     def __str__(self):
         return self.name
 
@@ -108,6 +121,10 @@ class VendorContract(TimestampedModel):
     contract_start = models.DateField()
     contract_end = models.DateField(null=True, blank=True)
     contract_pdf_url = models.URLField(blank=True, default='')
+
+    class Meta:
+        verbose_name = '공급사 계약'
+        verbose_name_plural = '공급사 계약'
 
     def __str__(self):
         return f'{self.vendor} {self.commission_rate}%'
@@ -132,6 +149,10 @@ class VendorDocument(TimestampedModel):
         'accounts.Curator', on_delete=models.SET_NULL, null=True, blank=True, related_name='+'
     )
     verified_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        verbose_name = '공급사 증빙 파일'
+        verbose_name_plural = '공급사 증빙 파일'
 
     def __str__(self):
         return f'{self.vendor} {self.get_type_display()}'
@@ -194,6 +215,8 @@ class Experience(TimestampedModel):
     published_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
+        verbose_name = '경험 상품'
+        verbose_name_plural = '경험 상품'
         indexes = [
             models.Index(fields=['country', 'region', 'status']),
             models.Index(fields=['category', 'status']),
@@ -251,6 +274,8 @@ class ExperienceMedia(TimestampedModel):
     is_cover = models.BooleanField('대표 이미지', default=False)
 
     class Meta:
+        verbose_name = '경험 이미지·영상'
+        verbose_name_plural = '경험 이미지·영상'
         ordering = ['display_order']
 
     def __str__(self):
@@ -273,6 +298,10 @@ class ExperienceOption(TimestampedModel):
     additional_price = money_field()
     max_quantity = models.IntegerField(default=1)
 
+    class Meta:
+        verbose_name = '경험 옵션'
+        verbose_name_plural = '경험 옵션'
+
     def __str__(self):
         return f'{self.experience} + {self.name}'
 
@@ -288,6 +317,8 @@ class ExperienceSchedule(TimestampedModel):
     is_blocked = models.BooleanField(default=False)
 
     class Meta:
+        verbose_name = '경험 일정 슬롯'
+        verbose_name_plural = '경험 일정 슬롯'
         unique_together = [('experience', 'date', 'start_time')]
         ordering = ['date', 'start_time']
 
@@ -302,6 +333,10 @@ class ExperienceEmbedding(TimestampedModel):
     content_hash = models.CharField(max_length=64)
     embedding = models.JSONField(null=True, blank=True)
     model_version = models.CharField(max_length=50, default='text-embedding-3-large')
+
+    class Meta:
+        verbose_name = '경험 임베딩 (RAG)'
+        verbose_name_plural = '경험 임베딩 (RAG)'
 
     def __str__(self):
         return f'embed<{self.experience}>'

@@ -24,6 +24,10 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
+    class Meta:
+        verbose_name = '회원'
+        verbose_name_plural = '회원'
+
     def __str__(self):
         return self.display_name or self.email
 
@@ -52,6 +56,10 @@ class UserProfile(TimestampedModel):
     total_booking_amount = money_field()
     vip_note = models.TextField(blank=True, default='')
 
+    class Meta:
+        verbose_name = '회원 프로필'
+        verbose_name_plural = '회원 프로필'
+
     def __str__(self):
         return f'Profile<{self.user}>'
 
@@ -70,6 +78,10 @@ class MembershipTier(TimestampedModel):
     annual_fee = money_field()
     benefits = models.JSONField(default=list, blank=True)
     priority_queue_weight = models.IntegerField(default=0)
+
+    class Meta:
+        verbose_name = '멤버십 등급'
+        verbose_name_plural = '멤버십 등급'
 
     def __str__(self):
         return self.name
@@ -91,6 +103,10 @@ class Membership(TimestampedModel):
     auto_renew = models.BooleanField(default=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
 
+    class Meta:
+        verbose_name = '멤버십 가입'
+        verbose_name_plural = '멤버십 가입'
+
     def __str__(self):
         return f'{self.user} · {self.tier}'
 
@@ -103,6 +119,10 @@ class Curator(TimestampedModel):
     specialty_categories = models.ManyToManyField('experiences.Category', blank=True, related_name='curators')
     signature_color = models.CharField(max_length=20, blank=True, default='')
     bio = models.TextField(blank=True, default='')
+
+    class Meta:
+        verbose_name = '큐레이터'
+        verbose_name_plural = '큐레이터'
 
     def __str__(self):
         return self.display_name

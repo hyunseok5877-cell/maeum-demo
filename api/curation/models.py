@@ -17,6 +17,10 @@ class PersonalityType(TimestampedModel):
     )
     image_url = models.URLField(blank=True, default='')
 
+    class Meta:
+        verbose_name = '성향 유형'
+        verbose_name_plural = '성향 유형'
+
     def __str__(self):
         return f'{self.code} · {self.name_ko}'
 
@@ -34,6 +38,10 @@ class PersonalityTestSession(TimestampedModel):
     )
     is_opted_in_curation = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name = '성향 테스트 응시'
+        verbose_name_plural = '성향 테스트 응시'
+
     def __str__(self):
         return f'Session {self.session_token}'
 
@@ -47,6 +55,8 @@ class PersonalityTestAnswer(TimestampedModel):
     answer_weight = models.JSONField(default=dict, blank=True)
 
     class Meta:
+        verbose_name = '성향 테스트 답변'
+        verbose_name_plural = '성향 테스트 답변'
         unique_together = [('session', 'question_code')]
 
     def __str__(self):
@@ -107,6 +117,8 @@ class CurationRequest(TimestampedModel):
     source = models.CharField(max_length=20, choices=SOURCE_CHOICES, default='web_form')
 
     class Meta:
+        verbose_name = '큐레이션 문의'
+        verbose_name_plural = '큐레이션 문의'
         ordering = ['-created_at']
 
     def __str__(self):
@@ -134,6 +146,8 @@ class CurationProposal(TimestampedModel):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
 
     class Meta:
+        verbose_name = '큐레이션 제안'
+        verbose_name_plural = '큐레이션 제안'
         unique_together = [('request', 'option_label')]
 
     def __str__(self):
@@ -155,6 +169,10 @@ class ChatSession(TimestampedModel):
     session_token = models.UUIDField(default=uuid.uuid4, unique=True, db_index=True)
     ended_at = models.DateTimeField(null=True, blank=True)
     conversion_status = models.CharField(max_length=30, choices=CONVERSION_CHOICES, default='browsing')
+
+    class Meta:
+        verbose_name = '챗봇 세션'
+        verbose_name_plural = '챗봇 세션'
 
     def __str__(self):
         return f'Chat {self.session_token}'
@@ -179,6 +197,8 @@ class ChatMessage(TimestampedModel):
     latency_ms = models.IntegerField(default=0)
 
     class Meta:
+        verbose_name = '챗봇 메시지'
+        verbose_name_plural = '챗봇 메시지'
         ordering = ['created_at']
 
     def __str__(self):
@@ -199,6 +219,8 @@ class Review(TimestampedModel):
     curator_reply = models.TextField(blank=True, default='')
 
     class Meta:
+        verbose_name = '후기'
+        verbose_name_plural = '후기'
         ordering = ['-created_at']
 
     def __str__(self):
@@ -212,6 +234,8 @@ class Wishlist(TimestampedModel):
     experience = models.ForeignKey('experiences.Experience', on_delete=models.CASCADE, related_name='wished_by')
 
     class Meta:
+        verbose_name = '찜'
+        verbose_name_plural = '찜'
         unique_together = [('user', 'experience')]
         ordering = ['-created_at']
 
