@@ -148,25 +148,37 @@ class Experience(TimestampedModel):
     ]
 
     slug = models.SlugField(max_length=200, unique=True)
-    title_ko = models.CharField(max_length=200)
-    title_en = models.CharField(max_length=200, blank=True, default='')
+    title_ko = models.CharField('상품명 (한)', max_length=200)
+    title_en = models.CharField('상품명 (영)', max_length=200, blank=True, default='')
     subtitle_ko = models.CharField(max_length=300, blank=True, default='')
     subtitle_en = models.CharField(max_length=300, blank=True, default='')
-    description_ko = models.TextField(blank=True, default='')
+    description_ko = models.TextField('짧은 설명', blank=True, default='', help_text='리스트·카드 노출용 요약')
     description_en = models.TextField(blank=True, default='')
+    content_html = models.TextField(
+        '상세 콘텐츠 (리치텍스트)', blank=True, default='',
+        help_text='네이버 블로그 스타일 에디터로 작성 — 글꼴·색·줄긋기·이미지·링크 자유롭게',
+    )
 
     country = models.ForeignKey(Country, on_delete=models.PROTECT, related_name='experiences')
     region = models.ForeignKey(Region, on_delete=models.PROTECT, related_name='experiences')
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='experiences')
     vendor = models.ForeignKey(Vendor, on_delete=models.SET_NULL, null=True, blank=True, related_name='experiences')
 
-    base_price = money_field()
+    base_price = money_field(verbose_name='정가 (KRW)')
+    discount_percentage = models.IntegerField(
+        '할인 %', default=0,
+        help_text='0~100. 설정 시 프론트에서 원가에 짝대기 + 할인가 노출',
+    )
     currency = models.CharField(max_length=3, default='KRW')
-    duration_minutes = models.IntegerField(default=0)
+    duration_minutes = models.IntegerField('소요시간(분)', default=0)
     min_pax = models.IntegerField(default=1)
     max_pax = models.IntegerField(default=4)
     advance_booking_days = models.IntegerField(default=3)
     cancellation_policy = models.TextField(blank=True, default='')
+
+    # 상품 가능 일자 (특정 기간만 운영할 때). null이면 상시.
+    available_from = models.DateField('가능일 시작', null=True, blank=True)
+    available_to = models.DateField('가능일 종료', null=True, blank=True)
 
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
     is_featured = models.BooleanField(default=False)
@@ -193,27 +205,63 @@ class Experience(TimestampedModel):
     def __str__(self):
         return self.title_ko
 
+    @property
+    def final_price(self):
+        """할인 반영 최종 가격 (정수 KRW)."""
+        from decimal import Decimal
+        if not self.discount_percentage:
+            return self.base_price
+        disc = Decimal(self.base_price) * Decimal(100 - self.discount_percentage) / Decimal(100)
+        return int(disc)
+
+    @property
+    def discount_amount(self):
+        from decimal import Decimal
+        if not self.discount_percentage:
+            return 0
+        return int(Decimal(self.base_price) - Decimal(self.final_price))
+
+
+def experience_file_upload_path(instance, filename):
+    """업로드 파일 경로: media/experiences/<slug>/<filename>"""
+    import os
+    base = os.path.basename(filename)
+    return f'experiences/{instance.experience.slug}/{base}'
+
 
 class ExperienceMedia(TimestampedModel):
-    """경험 이미지·영상."""
+    """경험 이미지·영상·문서. JPG/PNG/GIF/WEBP/MP4/PDF 업로드 가능."""
 
     TYPE_CHOICES = [
         ('image', '이미지'),
         ('video', '영상'),
+        ('document', '문서'),
     ]
+    ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'avif', 'svg', 'mp4', 'mov', 'webm', 'pdf']
 
     experience = models.ForeignKey(Experience, on_delete=models.CASCADE, related_name='media')
     type = models.CharField(max_length=10, choices=TYPE_CHOICES, default='image')
-    url = models.URLField()
+    file = models.FileField(
+        '파일 업로드', upload_to=experience_file_upload_path, null=True, blank=True,
+        help_text='JPG · PNG · GIF · WEBP · MP4 · PDF 등. 외부 URL만 쓸 경우 비워도 됨.',
+    )
+    url = models.URLField('외부 URL', blank=True, default='', help_text='업로드 대신 외부 이미지 URL 사용 시')
     display_order = models.IntegerField(default=0)
-    alt_text = models.CharField(max_length=300, blank=True, default='')
-    is_cover = models.BooleanField(default=False)
+    alt_text = models.CharField(max_length=300, blank=True, default='', help_text='접근성 대체 텍스트')
+    is_cover = models.BooleanField('대표 이미지', default=False)
 
     class Meta:
         ordering = ['display_order']
 
     def __str__(self):
         return f'{self.experience} · {self.type}'
+
+    @property
+    def src(self):
+        """프론트 렌더링용 최종 소스 URL."""
+        if self.file:
+            return self.file.url
+        return self.url
 
 
 class ExperienceOption(TimestampedModel):

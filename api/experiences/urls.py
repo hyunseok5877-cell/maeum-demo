@@ -1,6 +1,10 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 from . import views
 
-urlpatterns = [
-    path('', views.experience_list, name='experience-list'),
-]
+router = DefaultRouter()
+router.register('countries', views.CountryViewSet, basename='country')
+router.register('regions', views.RegionViewSet, basename='region')
+router.register('categories', views.CategoryViewSet, basename='category')
+router.register('', views.ExperienceViewSet, basename='experience')
+
+urlpatterns = router.urls

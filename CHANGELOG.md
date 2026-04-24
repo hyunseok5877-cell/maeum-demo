@@ -8,6 +8,57 @@
 
 ---
 
+## [v0.7] — 2026-04-24
+
+### 확정
+- **상품 등록 필드 확장** (오너 요청):
+  - `Experience.discount_percentage` (0~100) — 설정 시 프론트에서 원가 line-through + 할인가 노출
+  - `Experience.content_html` — 네이버 블로그 스타일 리치 에디터(django-summernote) 연동
+  - `Experience.available_from` / `available_to` — 판매 가능 일자
+  - `Experience.final_price` / `discount_amount` — 파생 프로퍼티(자동계산)
+- **파일 업로드**: `ExperienceMedia.file` FileField 추가. **JPG/PNG/GIF/WEBP/AVIF/SVG/MP4/MOV/WEBM/PDF** 허용. `url` 외부링크 옵션 유지
+
+### H단계 완료 — API 연결
+- DRF serializer/viewset (`experiences/serializers.py`, `experiences/views.py`)
+- 엔드포인트:
+  - `GET /api/experiences/` — 카탈로그 (region/category/country 필터, ordering, search)
+  - `GET /api/experiences/featured/` — 홈 히어로 추천
+  - `GET /api/experiences/<slug>/` — 상세 (content_html + 옵션 + 미디어 포함)
+  - `GET /api/experiences/regions/` — 지역 리스트
+  - `GET /api/experiences/categories/` — 카테고리 리스트
+  - `GET /api/experiences/countries/` — 국가 리스트
+- 프론트 `web/src/lib/api.ts` + `<ExperienceCard>` 컴포넌트
+- **홈에 "이 주의 큐레이션" 섹션 추가** — API 데이터로 카드 3~4개 그리드 렌더
+- 페라리 선셋 경험에 15% 할인 데모 적용 (line-through + OFF 배지 확인)
+- `django-summernote` 통합: Experience 어드민에서 `content_html` 필드가 WYSIWYG 에디터(볼드·색상·폰트·줄긋기·URL·이미지 삽입)
+
+### I단계 완료 — 자동 테스트 + CI
+- Playwright 설치 (`e2e/`)
+- 8개 smoke 테스트 작성:
+  1. 홈 히어로·로고 렌더
+  2. 히어로 서브카피(슈퍼카·요트·외승) 노출
+  3. **금지어(여행/투어/관광) 0건 검증** — 불변 규칙 자동화
+  4. 중개자 고지 푸터 노출
+  5. 이 주의 큐레이션 섹션 + 카드 최소 1개
+  6. 할인 경험 line-through + 15% OFF 배지
+  7. `/api/health` 200 응답
+  8. featured API 데이터 검증 (slug, final_price, discount_percentage 필드)
+- **8/8 통과 확인** (2.8s)
+- GitHub Actions CI 워크플로 `.github/workflows/ci.yml`:
+  - `backend` job — Django migrate + check + seed
+  - `frontend` job — Next.js lint + build
+  - `e2e` job — 두 서버 기동 후 Playwright 실행, 실패 시 report 업로드
+
+### 기타
+- `next.config.ts` — `images.remotePatterns`에 localhost·unsplash 추가
+- CORS_ALLOWED_ORIGINS에 http://localhost:3001 추가
+- API 헬스 개념 설명 (CHANGELOG 외 대화로만)
+- 메모리: "웹 접속·WebFetch 승인 요청 금지" 피드백 추가
+
+### 결정자: AI 실행, 오너 지시
+
+---
+
 ## [v0.6] — 2026-04-24
 
 ### 확정

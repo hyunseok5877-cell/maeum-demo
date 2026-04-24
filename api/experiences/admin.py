@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django_summernote.admin import SummernoteModelAdmin
+
 from .models import (
     Country, Region, Category, Tag, Vendor, VendorContract, VendorDocument,
     Experience, ExperienceMedia, ExperienceOption, ExperienceSchedule, ExperienceEmbedding,
@@ -53,6 +55,7 @@ class VendorAdmin(admin.ModelAdmin):
 class ExperienceMediaInline(admin.TabularInline):
     model = ExperienceMedia
     extra = 1
+    fields = ('type', 'file', 'url', 'is_cover', 'display_order', 'alt_text')
 
 
 class ExperienceOptionInline(admin.TabularInline):
@@ -73,13 +76,14 @@ class ExperienceScheduleInline(admin.TabularInline):
 
 
 @admin.register(Experience)
-class ExperienceAdmin(admin.ModelAdmin):
+class ExperienceAdmin(SummernoteModelAdmin):
+    summernote_fields = ('content_html',)
     list_display = (
         'title_ko', 'category', 'region', 'status', 'is_featured',
-        'base_price', 'rating_avg', 'booking_count', 'published_at',
+        'base_price', 'discount_percentage', 'rating_avg', 'booking_count', 'published_at',
     )
     list_filter = ('status', 'is_featured', 'category', 'country', 'region')
-    list_editable = ('status', 'is_featured')
+    list_editable = ('status', 'is_featured', 'discount_percentage')
     search_fields = ('title_ko', 'title_en', 'slug')
     prepopulated_fields = {'slug': ('title_en',)}
     autocomplete_fields = ('country', 'region', 'category', 'vendor')
@@ -88,11 +92,22 @@ class ExperienceAdmin(admin.ModelAdmin):
     fieldsets = (
         ('기본', {'fields': ('slug', 'title_ko', 'title_en', 'subtitle_ko', 'subtitle_en', 'status', 'is_featured')}),
         ('분류', {'fields': ('country', 'region', 'category', 'vendor', 'tags')}),
-        ('상세', {'fields': ('description_ko', 'description_en', 'cancellation_policy')}),
-        ('운영', {'fields': ('base_price', 'currency', 'duration_minutes', 'min_pax', 'max_pax', 'advance_booking_days')}),
+        ('짧은 설명 (리스트·카드용)', {'fields': ('description_ko', 'description_en')}),
+        ('상세 콘텐츠 (리치 에디터)', {'fields': ('content_html',)}),
+        ('가격·할인', {'fields': ('base_price', 'discount_percentage', 'currency')}),
+        ('운영', {'fields': ('duration_minutes', 'min_pax', 'max_pax', 'advance_booking_days', 'cancellation_policy')}),
+        ('판매 가능 일자', {'fields': ('available_from', 'available_to')}),
         ('지표', {'fields': ('rating_avg', 'rating_count', 'views_count', 'booking_count'), 'classes': ('collapse',)}),
         ('SEO', {'fields': ('seo_meta_title', 'seo_meta_description', 'published_at'), 'classes': ('collapse',)}),
     )
+
+
+@admin.register(ExperienceMedia)
+class ExperienceMediaAdmin(admin.ModelAdmin):
+    list_display = ('experience', 'type', 'is_cover', 'display_order', 'file', 'url')
+    list_filter = ('type', 'is_cover')
+    search_fields = ('experience__title_ko', 'alt_text')
+    autocomplete_fields = ('experience',)
 
 
 @admin.register(ExperienceEmbedding)

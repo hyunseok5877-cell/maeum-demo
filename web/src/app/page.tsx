@@ -1,29 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getFeaturedExperiences } from "@/lib/api";
+import { ExperienceCard } from "@/components/ExperienceCard";
 
-export default function Home() {
+export const revalidate = 60;
+
+export default async function Home() {
+  const featured = await getFeaturedExperiences();
+
   return (
     <>
       <header className="fixed top-0 inset-x-0 z-50 h-[72px] flex items-center justify-between px-8 md:px-12">
         <Link href="/" aria-label="마음" className="flex items-center">
-          <Image
-            src="/logo.png"
-            alt="마음"
-            width={44}
-            height={44}
-            priority
-          />
+          <Image src="/logo.png" alt="마음" width={44} height={44} priority />
         </Link>
         <nav className="hidden md:flex items-center gap-10">
-          <span className="caption text-ink-inverse opacity-80 hover:opacity-100 transition">
+          <Link href="/experiences" className="caption text-ink-inverse opacity-80 hover:opacity-100 transition">
             Experiences
-          </span>
-          <span className="caption text-ink-inverse opacity-80 hover:opacity-100 transition">
+          </Link>
+          <Link href="/regions" className="caption text-ink-inverse opacity-80 hover:opacity-100 transition">
             Regions
-          </span>
-          <span className="caption text-ink-inverse opacity-80 hover:opacity-100 transition">
+          </Link>
+          <Link href="/stories" className="caption text-ink-inverse opacity-80 hover:opacity-100 transition">
             Stories
-          </span>
+          </Link>
         </nav>
       </header>
 
@@ -37,11 +37,7 @@ export default function Home() {
             </p>
             <h1
               className="font-[family-name:var(--font-serif)] text-ink-inverse"
-              style={{
-                fontSize: "clamp(48px, 7vw, 72px)",
-                lineHeight: 1.05,
-                letterSpacing: "-0.02em",
-              }}
+              style={{ fontSize: "clamp(48px, 7vw, 72px)", lineHeight: 1.05, letterSpacing: "-0.02em" }}
             >
               꿈꾸던 하루를
               <br />
@@ -53,18 +49,18 @@ export default function Home() {
               슈퍼카 · 요트 · 프라이빗 외승.
             </p>
             <div className="mt-12 flex flex-col sm:flex-row gap-4">
-              <button
-                type="button"
-                className="h-[52px] px-8 bg-ink-inverse text-ink font-medium transition hover:bg-white"
+              <Link
+                href="/experiences"
+                className="h-[52px] px-8 inline-flex items-center justify-center bg-ink-inverse text-ink font-medium transition hover:bg-white"
               >
                 경험 둘러보기
-              </button>
-              <button
-                type="button"
-                className="h-[52px] px-8 border border-ink-inverse/30 text-ink-inverse font-medium transition hover:bg-white/10"
+              </Link>
+              <Link
+                href="/request-curation"
+                className="h-[52px] px-8 inline-flex items-center justify-center border border-ink-inverse/30 text-ink-inverse font-medium transition hover:bg-white/10"
               >
                 나만의 하루 설계 받기
-              </button>
+              </Link>
             </div>
           </div>
         </section>
@@ -73,11 +69,7 @@ export default function Home() {
         <section className="py-[120px] px-8 md:px-16">
           <p
             className="font-[family-name:var(--font-serif)] max-w-4xl mx-auto text-center text-ink"
-            style={{
-              fontSize: "clamp(32px, 4vw, 56px)",
-              lineHeight: 1.12,
-              letterSpacing: "-0.01em",
-            }}
+            style={{ fontSize: "clamp(32px, 4vw, 56px)", lineHeight: 1.12, letterSpacing: "-0.01em" }}
           >
             모든 경험은
             <br />
@@ -85,19 +77,38 @@ export default function Home() {
           </p>
         </section>
 
-        {/* API Health indicator (dev only) */}
-        <section className="py-8 px-8 md:px-16 border-t border-line">
-          <p className="caption">
-            <span className="text-ink-muted">DEV · API</span>{" "}
-            <a
-              href="http://localhost:8000/api/health/"
-              target="_blank"
-              rel="noreferrer"
-              className="underline hover:text-ink"
-            >
-              localhost:8000/api/health
-            </a>
-          </p>
+        {/* Featured */}
+        <section className="py-[120px] px-8 md:px-16 border-t border-line">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex justify-between items-end mb-16">
+              <div>
+                <p className="caption text-ink-muted mb-4">THIS WEEK · CURATED</p>
+                <h2
+                  className="font-[family-name:var(--font-serif)] text-ink"
+                  style={{ fontSize: "clamp(32px, 4vw, 56px)", lineHeight: 1.08, letterSpacing: "-0.02em" }}
+                >
+                  이 주의 큐레이션
+                </h2>
+              </div>
+              <Link href="/experiences" className="caption text-ink hover:opacity-70 transition">
+                전체 보기 →
+              </Link>
+            </div>
+            {featured.length === 0 ? (
+              <div className="py-16 text-center">
+                <p className="text-ink-muted">현재 공개된 경험이 없습니다.</p>
+                <p className="caption text-ink-muted mt-2">
+                  Django admin에서 경험을 등록하거나 백엔드 서버를 확인해주세요.
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {featured.map((exp) => (
+                  <ExperienceCard key={exp.id} exp={exp} />
+                ))}
+              </div>
+            )}
+          </div>
         </section>
       </main>
 

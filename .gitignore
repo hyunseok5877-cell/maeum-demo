@@ -41,3 +41,9 @@ yarn-error.log*
 # Coverage
 coverage/
 .nyc_output/
+
+# Playwright
+playwright-report/
+test-results/
+blob-report/
+.playwright/
