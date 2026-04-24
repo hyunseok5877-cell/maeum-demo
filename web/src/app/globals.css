@@ -88,6 +88,47 @@ body {
   color: var(--color-ink-muted);
 }
 
+/* 리치 에디터(Summernote)에서 들어온 content_html 렌더용 */
+.prose-maeum {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--color-ink);
+}
+.prose-maeum h1,
+.prose-maeum h2,
+.prose-maeum h3 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 2em 0 0.6em;
+}
+.prose-maeum h1 { font-size: 40px; }
+.prose-maeum h2 { font-size: 32px; }
+.prose-maeum h3 { font-size: 24px; }
+.prose-maeum p { margin: 1em 0; }
+.prose-maeum a { color: var(--color-ink); text-decoration: underline; text-underline-offset: 4px; }
+.prose-maeum strong { font-weight: 600; }
+.prose-maeum em { font-style: italic; }
+.prose-maeum s { text-decoration: line-through; }
+.prose-maeum ul,
+.prose-maeum ol { padding-left: 1.5em; margin: 1em 0; }
+.prose-maeum ul { list-style: disc; }
+.prose-maeum ol { list-style: decimal; }
+.prose-maeum li { margin: 0.3em 0; }
+.prose-maeum img {
+  max-width: 100%;
+  height: auto;
+  margin: 2em 0;
+}
+.prose-maeum blockquote {
+  border-left: 2px solid var(--color-ink);
+  padding-left: 1.5em;
+  margin: 2em 0;
+  font-style: italic;
+  color: var(--color-ink-muted);
+}
+.prose-maeum hr { border: 0; border-top: 1px solid var(--color-line); margin: 3em 0; }
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

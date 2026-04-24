@@ -8,6 +8,43 @@
 
 ---
 
+## [v0.8] — 2026-04-24
+
+### 확정 규칙
+- **RAG 챗봇 · TossPayments 결제 = 프로젝트 최후 순위** (DECISIONS §🚨 #7 추가). 공급·경험 상세·카탈로그·성향테스트·큐레이션문의 전부 완성된 뒤 마지막에.
+
+### 추가
+- `/experiences` — 카탈로그 페이지. 카테고리별(슈퍼카·요트·외승) 섹션 그룹핑, 경험 카드 그리드
+- `/experiences/[slug]` — 경험 상세 페이지
+  - 히어로 갤러리 (대표 16:10 + 서브 2장)
+  - 제목·서브카피·카테고리·지역·소요시간 메타 라인
+  - Sticky 우측 가격 카드 (원가 line-through → 할인가·% OFF, 인원·소요·예약시점·가능일·공급)
+  - "문의하기" CTA
+  - STORY 섹션 — `content_html` 리치 렌더 (`.prose-maeum` 글꼴·헤딩·리스트·색상·링크 스타일)
+  - ADD-ONS 옵션 리스트 (추가 가격 표시)
+  - CONSIDERATIONS 안내 (인원·예약시점·취소 정책)
+  - MOTION 섹션 — 비디오 파일이 있으면 `<video controls>` 노출
+  - 풀폭 최종 CTA — "이 경험이 당신의 마음에 닿기를" 블랙 섹션
+- `<SiteHeader>` · `<SiteFooter>` 컴포넌트 분리 (overlay/solid variant)
+- `.prose-maeum` 글로벌 스타일: 리치 에디터 HTML(H·p·ul·ol·a·strong·em·s·blockquote·hr·img) 일관 렌더
+
+### 수정
+- **Next.js Turbopack 이슈 회피**: 한글 폴더명(`경험플랫폼`) + 동적 라우트(`[slug]`) 조합에서 Turbopack이 UTF-8 바이트 경계 패닉 → `package.json` 스크립트를 `next dev --webpack` / `next build --webpack`으로 전환. 프로덕션 영향 없음.
+
+### 시연 데이터 보강
+- 페라리 선셋 경험에 리치 콘텐츠(h2·h3·리스트·strong·em·color·hr) 시드
+- 옵션 2개 추가 (전담 포토그래퍼 80만원 · 남산 팔각정 테라스 40만원)
+- 취소 정책 4단계 시드
+
+### 검증
+- 홈 200 · /experiences 200 · /experiences/ferrari-sunset-namsan 200
+- 상세 페이지에서 리치 HTML·옵션·취소정책 모두 확인
+- 스크린샷 4장 저장 (01_home_hero, 02_catalog, 03_detail, 04_detail_top)
+
+### 결정자: AI 실행, 오너 지시
+
+---
+
 ## [v0.7] — 2026-04-24
 
 ### 확정

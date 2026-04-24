@@ -144,6 +144,7 @@
 4. **프라이빗 셰프·소개팅 상품화 금지** — Phase 1 제외. 관련 DB 레코드 생성 금지
 5. **멤버십 UI 런칭 시 비활성** — Phase 2 시점 오너 명시 승인 후 활성화
 6. **모든 문서 변경은 `CHANGELOG.md`에 기록** — append-only, 삭제 금지
+7. **RAG 챗봇 · TossPayments 결제 = 프로젝트 최후 순위** (2026-04-24 확정). 공급·경험 상세·카탈로그·성향테스트·큐레이션문의 등 핵심 플로우 전부 완성 이후 마지막에 구현
 
 ---
 
@@ -183,6 +184,7 @@
 | v0.4 | 2026-04-24 | 브랜드 무드보드 v0.1 확정 — Aesop/Jil Sander/Rimowa 레퍼런스, 컬러(Ivory/Ink/Line Grey) 3종 + 액센트 보류, 폰트(EB Garamond+Pretendard+Inter 무료 조합), 12컬럼 그리드·직각버튼·수직리듬 120/80/64. `design-tokens.json` 생성 | snapshot |
 | v0.5 | 2026-04-24 | 레포 부트스트랩 완료 (Next.js 16 + Tailwind v4 + Django 5). 홈 히어로 1차·Django 3 앱 스켈레톤·디자인 토큰 주입·로고 배치·git init. 브랜드 관계: 마음 에이전시 하위 사업부로 확정 | snapshot |
 | v0.6 | 2026-04-24 | Django 29개 모델 전체 구현 (accounts 신규 6 + experiences 12 + bookings 4 + curation 9). 어드민 자동등록·시드 데이터·수퍼유저 생성. 홈 헤더 MAEUM 텍스트 제거 | snapshot |
-| **v0.7** | **2026-04-24** | **상품 필드 확장(할인%·판매가능일·리치콘텐츠), 파일 업로드(다양한 형식), 네이버 블로그형 리치 에디터(django-summernote). H단계 API 연결 완료(DRF serializer/viewset, 프론트 카드 렌더·할인 line-through). I단계 Playwright 8/8 통과 + GitHub Actions CI** | **current** |
+| v0.7 | 2026-04-24 | 상품 필드 확장·파일업로드·Summernote 리치 에디터. H API 연결·I Playwright+CI 완료 | snapshot |
+| **v0.8** | **2026-04-24** | **카탈로그 페이지 + 경험 상세 페이지(히어로 갤러리·Sticky 가격 카드·리치 콘텐츠 렌더·옵션·안내·비디오·풀CTA). SiteHeader/Footer 컴포넌트 분리. Next.js Turbopack→Webpack 전환(한글폴더 이슈). RAG·결제 = 최후 순위 규칙 확정** | **current** |
 
 **롤백 방법**: 오너가 "v0.2로 롤백" 요청 시 → 본 파일에서 v0.3 변경분을 되돌리고 v0.2 상태로 재기록. CHANGELOG.md에 롤백 이벤트 append.
