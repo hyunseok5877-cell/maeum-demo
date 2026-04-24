@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, EB_Garamond } from "next/font/google";
 import "./globals.css";
+import { RecentBookingsTicker } from "@/components/RecentBookingsTicker";
 
 const sans = Inter({
   variable: "--font-sans",
@@ -30,7 +31,10 @@ export default function RootLayout({
       lang="ko"
       className={`${sans.variable} ${serif.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <RecentBookingsTicker />
+      </body>
     </html>
   );
 }

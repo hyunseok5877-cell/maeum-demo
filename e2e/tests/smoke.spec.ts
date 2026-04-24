@@ -151,6 +151,32 @@ test.describe("마음 (Maeum) — Smoke", () => {
     await expect(page.locator('a[href*="jeju-private-equestrian"]')).toHaveCount(0);
   });
 
+  test("최근 예약 티커 위젯 — 마스킹된 ID 노출", async ({ page }) => {
+    await page.goto("/");
+    // localStorage 초기화 (dismissed 상태 제거)
+    await page.evaluate(() => localStorage.removeItem("maeum_ticker_dismissed"));
+    await page.reload();
+    const ticker = page.locator('[aria-live="polite"]').first();
+    await expect(ticker).toBeVisible({ timeout: 10000 });
+    // 마스킹 패턴 확인 (ab**cd 또는 a**b 등)
+    await expect(ticker).toContainText(/\*\*/);
+    await expect(ticker).toContainText(/전 예약/);
+  });
+
+  test("최근 예약 API — 마스킹 검증", async ({ request }) => {
+    const res = await request.get("http://localhost:8000/api/bookings/recent/");
+    expect(res.status()).toBe(200);
+    const data = await res.json();
+    expect(Array.isArray(data.results)).toBe(true);
+    if (data.results.length > 0) {
+      const first = data.results[0];
+      expect(first).toHaveProperty("masked_id");
+      // 마스킹된 형태여야 함 (** 포함)
+      expect(first.masked_id).toContain("**");
+      expect(first).toHaveProperty("experience_title");
+    }
+  });
+
   test("큐레이션 요청 API — 게스트 접수", async ({ request }) => {
     const res = await request.post("http://localhost:8000/api/curation/requests/", {
       data: {
