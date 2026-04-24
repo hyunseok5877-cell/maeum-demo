@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <header className="fixed top-0 inset-x-0 z-50 h-[72px] flex items-center justify-between px-8 md:px-12">
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/" aria-label="마음" className="flex items-center">
           <Image
             src="/logo.png"
             alt="마음"
@@ -13,7 +13,6 @@ export default function Home() {
             height={44}
             priority
           />
-          <span className="caption text-ink-inverse">MAEUM</span>
         </Link>
         <nav className="hidden md:flex items-center gap-10">
           <span className="caption text-ink-inverse opacity-80 hover:opacity-100 transition">

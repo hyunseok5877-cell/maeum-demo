@@ -29,10 +29,13 @@ INSTALLED_APPS = [
     'django_filters',
 
     # local apps
+    'accounts',
     'experiences',
     'bookings',
     'curation',
 ]
+
+AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',

@@ -8,6 +8,36 @@
 
 ---
 
+## [v0.6] — 2026-04-24
+
+### 확정
+- **Django 모델 29개 구현 완료** — `docs/01_entity_definition.md` 기준
+- **accounts 앱 신규**: User(AbstractUser 확장·이메일 로그인) + UserProfile + MembershipTier + Membership + Curator + AuditLog (6개)
+- **experiences 앱 12개**: Country · Region · Category · Tag · Vendor · VendorContract · VendorDocument · Experience · ExperienceMedia · ExperienceOption · ExperienceSchedule · ExperienceEmbedding
+- **bookings 앱 4개**: Booking · BookingItem · Payment(idempotency_key 포함) · Refund
+- **curation 앱 9개**: PersonalityType · PersonalityTestSession · PersonalityTestAnswer · CurationRequest · CurationProposal · ChatSession · ChatMessage · Review · Wishlist
+- 공통 믹스인 `maeum/common.py`: `TimestampedModel` (created/updated/deleted_at) + `money_field()` (KRW BigInt)
+- `settings.AUTH_USER_MODEL = 'accounts.User'` 적용, DB 초기화 후 재마이그레이션
+- 29개 모델 어드민 자동 등록 (inline, autocomplete, search_fields, filter, fieldsets)
+
+### 시드 데이터
+- `python manage.py seed_maeum` — 멱등 투입 커맨드
+- 국가 4 / 지역 8(한국 전부) / 카테고리 3(슈퍼카·요트·외승) / 태그 6 / 벤더 3 / 멤버십 3(Phase 1 UI 비활성) / 성향유형 4 / 경험 6(서울·부산·제주 각 2)
+
+### 어드민
+- 수퍼유저 생성: `admin@maeum.local` / `maeum2026` (로컬 개발용)
+- `http://localhost:8000/admin/` 접속 가능
+
+### 프론트 수정
+- 헤더에서 "MAEUM" 텍스트 삭제 (로고 단독 표시) — 오너 요청
+
+### 검증
+- `migrate` ✓ / `check` 에러 0개 / `seed_maeum` 성공 / Admin HTTP 200
+
+### 결정자: AI 실행, 오너 지시
+
+---
+
 ## [v0.5] — 2026-04-24
 
 ### 확정

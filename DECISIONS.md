@@ -181,6 +181,7 @@
 | v0.2 | 2026-04-24 | 시장조사 반영 — Knight Frank/McKinsey/Bain 뒷받침, 수수료 25% 표준, 추천모델 하이브리드 | post-research |
 | v0.3 | 2026-04-24 | 서비스명 "마음" 확정 / 카테고리 (슈퍼카+요트+외승)로 축소, 셰프·소개팅 제외 / 브랜드 "모던 미니멀" / 도메인 확보·법무자문 실비 0원 / 하이브리드(6개월 객단가 → Gold 도입) / Black Tomato UX 벤치마크 반영 방침 | snapshot |
 | v0.4 | 2026-04-24 | 브랜드 무드보드 v0.1 확정 — Aesop/Jil Sander/Rimowa 레퍼런스, 컬러(Ivory/Ink/Line Grey) 3종 + 액센트 보류, 폰트(EB Garamond+Pretendard+Inter 무료 조합), 12컬럼 그리드·직각버튼·수직리듬 120/80/64. `design-tokens.json` 생성 | snapshot |
-| **v0.5** | **2026-04-24** | **레포 부트스트랩 완료 (Next.js 16 + Tailwind v4 + Django 5). 홈 히어로 1차·Django 3 앱 스켈레톤·디자인 토큰 주입·로고 배치·git init. 브랜드 관계: 마음 에이전시 하위 사업부로 확정. Initial commit b5ec30e** | **current** |
+| v0.5 | 2026-04-24 | 레포 부트스트랩 완료 (Next.js 16 + Tailwind v4 + Django 5). 홈 히어로 1차·Django 3 앱 스켈레톤·디자인 토큰 주입·로고 배치·git init. 브랜드 관계: 마음 에이전시 하위 사업부로 확정 | snapshot |
+| **v0.6** | **2026-04-24** | **Django 29개 모델 전체 구현 (accounts 신규 6 + experiences 12 + bookings 4 + curation 9). 어드민 자동등록·시드 데이터(국가4·지역8·카테고리3·벤더3·경험6)·수퍼유저 생성. 홈 헤더 MAEUM 텍스트 제거** | **current** |
 
 **롤백 방법**: 오너가 "v0.2로 롤백" 요청 시 → 본 파일에서 v0.3 변경분을 되돌리고 v0.2 상태로 재기록. CHANGELOG.md에 롤백 이벤트 append.
