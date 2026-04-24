@@ -8,6 +8,43 @@
 
 ---
 
+## [v0.5] — 2026-04-24
+
+### 확정
+- **브랜드 관계 확정**: "마음" 플랫폼은 **기존 마음 AI 에이전시의 하위 사업부** (동일 마스터브랜드, 로고 공유)
+  - Before: 브랜드 관계 미정 (DECISIONS open question #5)
+  - After: 동일 브랜드, 기존 `~/Desktop/마음web/maeum_logo.png` 공유 사용
+  - 이유: 오너가 기존 로고 이미지 전달함으로써 확정
+
+### 추가 — 레포 부트스트랩
+- 모노레포 구조: `경험플랫폼/{web, api, docs}` + 루트 설정 파일
+- **web/** — Next.js 16.2.4 + React 19.2.4 + Tailwind v4 + TypeScript + ESLint
+  - `src/app/globals.css` — `@theme` 블록에 `design-tokens.json` 주입
+  - `src/app/layout.tsx` — EB Garamond(Display) + Inter(Body) 폰트 로드, lang="ko"
+  - `src/app/page.tsx` — 홈 히어로 1차 (브랜드·감정 스테이트먼트·API 헬스 표시·푸터 중개자 고지)
+  - `public/logo.png` — 마음 로고 배치
+- **api/** — Django 5.1.15 + DRF + django-cors-headers + django-filter + python-dotenv
+  - `maeum/settings.py` — KR 로케일(Asia/Seoul), CORS, DRF 기본 설정, .env 로드
+  - `maeum/urls.py` — `/api/health/`, `/api/experiences/`, `/api/bookings/`, `/api/curation/`
+  - 3개 앱 스켈레톤: `experiences`, `bookings`, `curation` (stub view + url)
+  - `requirements.txt`, `.env.example`
+  - `api_venv/` Python 가상환경 (gitignore됨)
+- **루트** — `README.md`, `.gitignore`, git init (main 브랜치)
+- **검증**: `next build` ✓ 정적 생성 4페이지 통과 / Django `migrate` + `check` ✓
+
+### 기술 결정 (부트스트랩 중)
+- **Next.js 16 권고** 준수: AGENTS.md 힌트대로 `node_modules/next/dist/docs/` 참조 후 코드 작성
+- **Tailwind v4 CSS-first 접근** 채택: `@theme` 블록 사용, `tailwind.config.ts` 불사용
+- **Django SQLite 개발 기본** / 프로덕션은 Postgres+pgvector 예정
+- **폰트 무료 조합 유지**: EB Garamond + Inter (Pretendard는 추후 self-host 또는 next/font/local)
+
+### Git
+- Initial commit: `b5ec30e`
+
+### 결정자: AI 실행 + 오너 지시 채택
+
+---
+
 ## [v0.4] — 2026-04-24
 
 ### 확정
