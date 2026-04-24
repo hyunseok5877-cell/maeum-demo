@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getAllExperiences } from "@/lib/api";
 import { ExperienceCard } from "@/components/ExperienceCard";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -10,8 +11,18 @@ export const metadata = {
   description: "슈퍼카 · 요트 · 프라이빗 외승 — 전 지역 큐레이션 경험",
 };
 
-export default async function ExperiencesIndex() {
-  const experiences = await getAllExperiences();
+export default async function ExperiencesIndex({
+  searchParams,
+}: {
+  searchParams: Promise<{ region?: string; category?: string }>;
+}) {
+  const params = await searchParams;
+  const experiences = await getAllExperiences({
+    region: params.region,
+    category: params.category,
+  });
+
+  const active = params.region || params.category;
 
   const byCategory = experiences.reduce<Record<string, typeof experiences>>((acc, e) => {
     const key = e.category.name_ko;
@@ -39,12 +50,35 @@ export default async function ExperiencesIndex() {
               모든 경험은 큐레이터의 손을 거쳐 소개됩니다.
               한 번에 한 순간만 제공하기에, 예약은 조용히 이뤄집니다.
             </p>
+            {active && (
+              <div className="mt-8 flex items-center gap-4">
+                <p className="caption text-ink-muted">FILTER</p>
+                {params.region && (
+                  <span className="px-4 py-1.5 bg-muted-bg text-ink caption">
+                    REGION · {params.region}
+                  </span>
+                )}
+                {params.category && (
+                  <span className="px-4 py-1.5 bg-muted-bg text-ink caption">
+                    CATEGORY · {params.category}
+                  </span>
+                )}
+                <Link href="/experiences" className="caption text-ink-muted hover:text-ink">
+                  필터 해제 ×
+                </Link>
+              </div>
+            )}
           </div>
         </section>
 
         {experiences.length === 0 ? (
           <section className="py-[120px] px-8 text-center">
-            <p className="text-ink-muted">현재 공개된 경험이 없습니다.</p>
+            <p className="text-ink-muted">현재 조건에 맞는 경험이 없습니다.</p>
+            {active && (
+              <Link href="/experiences" className="caption text-ink underline mt-4 inline-block">
+                필터 해제
+              </Link>
+            )}
           </section>
         ) : (
           Object.entries(byCategory).map(([category, items]) => (

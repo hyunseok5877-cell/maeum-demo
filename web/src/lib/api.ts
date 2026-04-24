@@ -105,12 +105,29 @@ export async function getFeaturedExperiences(): Promise<ExperienceCard[]> {
   }
 }
 
-export async function getAllExperiences(): Promise<ExperienceCard[]> {
+export async function getAllExperiences(filter?: {
+  region?: string;
+  category?: string;
+}): Promise<ExperienceCard[]> {
   try {
+    const qs = new URLSearchParams({ ordering: "-is_featured,-published_at" });
+    if (filter?.region) qs.set("region__code", filter.region);
+    if (filter?.category) qs.set("category__code", filter.category);
     const data = await fetchJson<{ count: number; results: ExperienceCard[] }>(
-      "/experiences/?ordering=-is_featured,-published_at"
+      `/experiences/?${qs.toString()}`
     );
     return data.results ?? [];
+  } catch {
+    return [];
+  }
+}
+
+export async function getRegions(): Promise<RegionSummary[]> {
+  try {
+    const data = await fetchJson<{ results: RegionSummary[] } | RegionSummary[]>(
+      "/experiences/regions/"
+    );
+    return Array.isArray(data) ? data : data.results ?? [];
   } catch {
     return [];
   }

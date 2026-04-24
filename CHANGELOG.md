@@ -8,6 +8,49 @@
 
 ---
 
+## [v0.9] — 2026-04-24
+
+### L — 성향 테스트 완료
+- `api/curation/quiz_data.py` — 6문항 × 4지선다, 4차원(N/D/T/R) 가중치 스코어링
+- `api/curation/views.py`:
+  - `GET /api/curation/quiz/questions/` — 공개 문항 (가중치 숨김)
+  - `POST /api/curation/quiz/submit/` — 답변 저장 + 자동 채점 + session_token 반환
+  - `GET /api/curation/quiz/result/<uuid>/` — 유형·설명·추천 경험 3건
+- 시드된 4유형(NOCTURNE_LUXE, DAWN_HEAL, THRILL_RIDER, ROMANCE_ARCHITECT)에 `hero_experiences` 연결
+- `web/src/app/quiz/page.tsx` — client-side 6문항 진행바 + 자동 전환 + 제출 → result 라우팅
+- `web/src/app/quiz/result/[token]/page.tsx` — Obsidian 배너(유형명·영문·설명) + 추천 3카드 + CTA `/request-curation?type=...`
+
+### M — 큐레이션 문의 완료
+- `POST /api/curation/requests/` — 게스트도 가능 (이메일·전화 중 1개 + 이름 필수)
+- `web/src/app/request-curation/page.tsx` — 3-step 폼
+  - Step 1: 날짜 범위·지역(select)·인원·예산 범위
+  - Step 2: 경험 맥락 6개 중 1개 (생일·기념일·프로포즈·비즈니스·자기보상·기타)
+  - Step 3: 자유 서술 + 게스트 연락처 + 제출
+  - `?type=` 쿼리로 퀴즈 결과 연동
+- 제출 성공 시 "문의 #N 접수" 확인 화면 + 다음 액션 CTA
+
+### N — 지역 페이지 + 카탈로그 필터
+- `web/src/app/regions/page.tsx`:
+  - 운영 중 지역 카드 그리드 (서울·부산·제주 — 경험 개수 뱃지)
+  - 지역명을 대형 세리프 워드마크로 표시 (이미지 없이도 브랜드 톤 유지)
+  - Coming Soon 지역 칩 (강원·경기·전남·경북·인천)
+- `web/src/app/experiences/page.tsx`:
+  - `?region=<code>` · `?category=<code>` 쿼리 필터 지원
+  - 필터 활성 시 뱃지 + "필터 해제" 링크
+  - 백엔드 DRF `filterset_fields={'region__code','category__code',...}` 기반
+
+### API 유틸
+- `src/lib/api.ts`: `getAllExperiences({region,category})`, `getRegions()` 함수 추가
+- `getExperienceBySlug()` 엔드포인트 연결
+
+### E2E 테스트 보강
+- 총 14개 (기존 8 + 신규 6) — **14/14 통과**
+- 추가: /quiz · /request-curation · /regions 렌더, /experiences?region 필터, 퀴즈 API end-to-end, 큐레이션 요청 API 게스트 접수
+
+### 결정자: AI 실행, 오너 지시
+
+---
+
 ## [v0.8] — 2026-04-24
 
 ### 확정 규칙

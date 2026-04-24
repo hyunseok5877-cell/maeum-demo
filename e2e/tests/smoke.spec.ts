@@ -62,11 +62,83 @@ test.describe("마음 (Maeum) — Smoke", () => {
     const data = await res.json();
     expect(Array.isArray(data.results)).toBe(true);
     expect(data.results.length).toBeGreaterThan(0);
-    // 첫 번째 경험의 필수 필드 검증
     const first = data.results[0];
     expect(first).toHaveProperty("slug");
     expect(first).toHaveProperty("title_ko");
     expect(first).toHaveProperty("final_price");
     expect(first).toHaveProperty("discount_percentage");
+  });
+
+  test("/quiz 페이지 렌더 + 테스트 시작 버튼", async ({ page }) => {
+    await page.goto("/quiz");
+    await expect(page.getByRole("heading", { name: /당신이 원하는 건/ })).toBeVisible();
+    await expect(page.getByRole("button", { name: /테스트 시작/ })).toBeVisible();
+  });
+
+  test("/request-curation 3-step 폼 렌더", async ({ page }) => {
+    await page.goto("/request-curation");
+    await expect(page.getByRole("heading", { name: /나만의 하루를/ })).toBeVisible();
+    await expect(page.getByText("1. 무엇을 원하시나요?")).toBeVisible();
+  });
+
+  test("/regions 지역 카드 렌더", async ({ page }) => {
+    await page.goto("/regions");
+    await expect(page.getByRole("heading", { name: /어디에서/ })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "서울" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "부산" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "제주" })).toBeVisible();
+  });
+
+  test("/experiences?region=seoul 필터 동작", async ({ page }) => {
+    await page.goto("/experiences?region=seoul");
+    await expect(page.getByText(/REGION · seoul/i)).toBeVisible();
+    // 서울 경험만 노출되어야 함 (람보르기니·페라리)
+    await expect(page.locator('a[href*="ferrari-sunset-namsan"]')).toBeVisible();
+    await expect(page.locator('a[href*="lamborghini-seoul-urban-drive"]')).toBeVisible();
+    // 제주 경험은 노출되면 안 됨
+    await expect(page.locator('a[href*="jeju-"]')).toHaveCount(0);
+  });
+
+  test("퀴즈 API end-to-end — 제출·결과", async ({ request }) => {
+    const submit = await request.post("http://localhost:8000/api/curation/quiz/submit/", {
+      data: {
+        answers: {
+          Q1: "luxury",
+          Q2: "couple",
+          Q3: "sunset",
+          Q4: "b3",
+          Q5: "pure_luxe",
+          Q6: "verified",
+        },
+      },
+    });
+    expect(submit.status()).toBe(201);
+    const { session_token, type } = await submit.json();
+    expect(type).toBe("NOCTURNE_LUXE");
+
+    const result = await request.get(
+      `http://localhost:8000/api/curation/quiz/result/${session_token}/`
+    );
+    expect(result.status()).toBe(200);
+    const data = await result.json();
+    expect(data.result_type.code).toBe("NOCTURNE_LUXE");
+    expect(data.recommended_experiences.length).toBeGreaterThan(0);
+  });
+
+  test("큐레이션 요청 API — 게스트 접수", async ({ request }) => {
+    const res = await request.post("http://localhost:8000/api/curation/requests/", {
+      data: {
+        guest_name: "홍길동",
+        guest_email: "test@example.com",
+        pax_count: 2,
+        occasion: "anniversary",
+        free_text: "E2E 테스트 요청",
+        source: "web_form",
+      },
+    });
+    expect(res.status()).toBe(201);
+    const data = await res.json();
+    expect(data).toHaveProperty("id");
+    expect(data.status).toBe("new");
   });
 });
