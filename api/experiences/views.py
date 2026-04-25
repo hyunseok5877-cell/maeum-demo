@@ -40,8 +40,10 @@ class ExperienceViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewse
         'region__code': ['exact'],
         'country__code': ['exact'],
         'is_featured': ['exact'],
+        'is_monthly_popular': ['exact'],
+        'is_new_arrival': ['exact'],
     }
-    ordering_fields = ['published_at', 'base_price', 'rating_avg', 'booking_count']
+    ordering_fields = ['published_at', 'base_price', 'rating_avg', 'booking_count', 'home_pick_order']
     ordering = ['-is_featured', '-published_at']
     search_fields = ['title_ko', 'title_en', 'subtitle_ko', 'description_ko']
 
@@ -50,9 +52,33 @@ class ExperienceViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewse
             return ExperienceDetailSerializer
         return ExperienceListSerializer
 
+    def _ordered(self, qs, limit=8):
+        """home_pick_order 우선 (NULL 뒤로) → published_at desc."""
+        from django.db.models import F
+        return (
+            qs.order_by(
+                F('home_pick_order').asc(nulls_last=True),
+                '-published_at',
+            )[:limit]
+        )
+
     @action(detail=False, methods=['get'])
     def featured(self, request):
-        """홈 '이 주의 큐레이션' 섹션용."""
-        qs = self.get_queryset().filter(is_featured=True)[:6]
+        """추천 = 마음 PICK 풀."""
+        qs = self._ordered(self.get_queryset().filter(is_featured=True))
+        serializer = ExperienceListSerializer(qs, many=True, context={'request': request})
+        return Response({'results': serializer.data})
+
+    @action(detail=False, methods=['get'])
+    def popular(self, request):
+        """월간 인기 풀 — 콘솔에서 명시적으로 켠 항목만."""
+        qs = self._ordered(self.get_queryset().filter(is_monthly_popular=True))
+        serializer = ExperienceListSerializer(qs, many=True, context={'request': request})
+        return Response({'results': serializer.data})
+
+    @action(detail=False, methods=['get'], url_path='new')
+    def new_arrivals(self, request):
+        """신상 풀."""
+        qs = self._ordered(self.get_queryset().filter(is_new_arrival=True))
         serializer = ExperienceListSerializer(qs, many=True, context={'request': request})
         return Response({'results': serializer.data})

@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { getAllExperiences, getCategories } from "@/lib/api";
+import {
+  getAllExperiences,
+  getCategories,
+  getFeaturedExperiences,
+  getPopularExperiences,
+  getNewArrivalExperiences,
+} from "@/lib/api";
 import { ExperienceCard } from "@/components/ExperienceCard";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -15,25 +21,18 @@ export const metadata = {
 };
 
 export default async function ExperiencesIndex() {
-  // Demo 정적 export 호환: searchParams 제거 — 필터링은 클라이언트에서 처리
-  const [all, categories] = await Promise.all([
+  // 각 풀(추천/인기/신상)은 백엔드에서 독립적으로 관리. 콘솔에서 따로따로 토글 가능.
+  const [all, categories, maeumPick, monthlyHot, newArrivals] = await Promise.all([
     getAllExperiences(),
     getCategories(),
+    getFeaturedExperiences(),
+    getPopularExperiences(),
+    getNewArrivalExperiences(),
   ]);
 
   const activeCategory: string = "";
   const regionFilter: string = "";
   const filtered: string = "";
-
-  const maeumPick = [...all].filter((e) => e.is_featured).slice(0, 8);
-  const monthlyHot = [...all]
-    .sort(
-      (a, b) =>
-        Number(b.rating_avg) * b.rating_count -
-        Number(a.rating_avg) * a.rating_count
-    )
-    .slice(0, 8);
-  const newArrivals = [...all].slice().reverse().slice(0, 8);
 
   return (
     <>

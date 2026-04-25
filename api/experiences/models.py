@@ -202,7 +202,25 @@ class Experience(TimestampedModel):
     available_to = models.DateField('가능일 종료', null=True, blank=True)
 
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
-    is_featured = models.BooleanField(default=False)
+
+    # ─── 노출 풀 (콘솔에서 체크박스로 따로따로 조작) ───
+    is_featured = models.BooleanField(
+        '추천 (마음 PICK)', default=False,
+        help_text='홈/Experiences 상단 "마음 PICK" 풀에 노출',
+    )
+    is_monthly_popular = models.BooleanField(
+        '월간 인기', default=False, db_index=True,
+        help_text='"월간 인기" 풀에 노출. 추천과 독립적으로 운영',
+    )
+    is_new_arrival = models.BooleanField(
+        '신상', default=False, db_index=True,
+        help_text='"신상" 풀에 노출. published_at만 보지 말고 명시적으로 지정',
+    )
+    home_pick_order = models.IntegerField(
+        '핀 고정 순서', null=True, blank=True, db_index=True,
+        help_text='작을수록 앞. 비워두면 published_at 정렬',
+    )
+
     rating_avg = models.DecimalField(max_digits=3, decimal_places=2, default=0)
     rating_count = models.IntegerField(default=0)
     views_count = models.IntegerField(default=0)

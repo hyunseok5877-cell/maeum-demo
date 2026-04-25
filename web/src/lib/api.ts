@@ -123,6 +123,32 @@ export async function getFeaturedExperiences(): Promise<ExperienceCard[]> {
   }
 }
 
+export async function getPopularExperiences(): Promise<ExperienceCard[]> {
+  if (isDemo) {
+    const d = await readSeed<{ results: ExperienceCard[] }>("popular.json");
+    return d?.results ?? [];
+  }
+  try {
+    const data = await fetchJson<{ results: ExperienceCard[] }>("/experiences/popular/");
+    return data.results ?? [];
+  } catch {
+    return [];
+  }
+}
+
+export async function getNewArrivalExperiences(): Promise<ExperienceCard[]> {
+  if (isDemo) {
+    const d = await readSeed<{ results: ExperienceCard[] }>("new.json");
+    return d?.results ?? [];
+  }
+  try {
+    const data = await fetchJson<{ results: ExperienceCard[] }>("/experiences/new/");
+    return data.results ?? [];
+  } catch {
+    return [];
+  }
+}
+
 export async function getAllExperiences(filter?: {
   region?: string;
   category?: string;

@@ -43,6 +43,9 @@
   "available_to": null,
   "status": "active",
   "is_featured": false,
+  "is_monthly_popular": true,
+  "is_new_arrival": false,
+  "home_pick_order": null,
   "rating_avg": "0.00",
   "rating_count": 0,
   "content_html": "",
@@ -83,5 +86,5 @@
   },
   "seo_meta_title": "",
   "seo_meta_description": "",
-  "published_at": "2026-04-25T14:39:03.003779+09:00"
+  "published_at": "2026-04-25T15:30:27.245914+09:00"
 }

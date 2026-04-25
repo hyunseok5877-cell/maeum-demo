@@ -52,6 +52,8 @@ async function main() {
   await dump("/api/experiences/categories/", "categories.json");
   await dump("/api/experiences/countries/", "countries.json");
   await dump("/api/experiences/featured/", "featured.json");
+  await dump("/api/experiences/popular/", "popular.json");
+  await dump("/api/experiences/new/", "new.json");
 
   const all = await dump(
     "/api/experiences/?ordering=-is_featured,-published_at",

@@ -159,7 +159,8 @@ EXPERIENCES = [
         'description_ko': '검정 람보르기니 우라칸 또는 우라칸 스파이더로 강남 · 한남 · 남산을 순회하는 프라이빗 드라이빙 세션. 인증 드라이버 옵션 포함. 촬영 옵션 선택 가능.',
         'region_code': 'seoul', 'category_code': 'supercar', 'vendor_name': '서울 프리미엄 오토',
         'base_price': 2_800_000, 'duration_minutes': 120, 'min_pax': 1, 'max_pax': 2,
-        'is_featured': True, 'tag_codes': ['luxury', 'thrill', 'private'],
+        'is_featured': True, 'is_monthly_popular': True, 'home_pick_order': 2,
+        'tag_codes': ['luxury', 'thrill', 'private'],
     },
     {
         'slug': 'ferrari-sunset-namsan',
@@ -169,7 +170,8 @@ EXPERIENCES = [
         'description_ko': '페라리 로마 혹은 포르토피노로 선셋 타이밍에 한남–남산–동작대교–반포대교를 순회합니다. 포토그래퍼 동행 옵션.',
         'region_code': 'seoul', 'category_code': 'supercar', 'vendor_name': '서울 프리미엄 오토',
         'base_price': 3_200_000, 'duration_minutes': 150, 'min_pax': 1, 'max_pax': 2,
-        'is_featured': True, 'tag_codes': ['luxury', 'sunset', 'thrill'],
+        'is_featured': True, 'is_monthly_popular': True, 'home_pick_order': 1,
+        'tag_codes': ['luxury', 'sunset', 'thrill'],
     },
 
     # 부산 요트
@@ -181,7 +183,8 @@ EXPERIENCES = [
         'description_ko': '해운대 수영만에서 출항해 광안대교 루트로 선셋 차터. 샴페인 1병 포함, 식사 업그레이드 가능.',
         'region_code': 'busan', 'category_code': 'yacht', 'vendor_name': '부산 블루 마리나',
         'base_price': 2_400_000, 'duration_minutes': 180, 'min_pax': 2, 'max_pax': 8,
-        'is_featured': True, 'tag_codes': ['luxury', 'sunset', 'romance'],
+        'is_featured': True, 'is_new_arrival': True, 'home_pick_order': 3,
+        'tag_codes': ['luxury', 'sunset', 'romance'],
     },
     {
         'slug': 'busan-night-yacht-champagne',
@@ -191,6 +194,7 @@ EXPERIENCES = [
         'description_ko': '야간 차터. 보조 셰프 옵션으로 간단한 카나페 서비스. 블랙타이 드레스코드 권장.',
         'region_code': 'busan', 'category_code': 'yacht', 'vendor_name': '부산 블루 마리나',
         'base_price': 2_900_000, 'duration_minutes': 150, 'min_pax': 2, 'max_pax': 6,
+        'is_monthly_popular': True, 'is_new_arrival': True,
         'tag_codes': ['luxury', 'private', 'romance'],
     },
 
@@ -203,7 +207,8 @@ EXPERIENCES = [
         'description_ko': '현역 K-pop 프로듀서·안무가와 함께하는 프라이빗 세션. 강남 녹음 스튜디오에서 나만의 한 트랙 레코딩, 성수동 댄스 스튜디오에서 안무 클래스, 메이크업·스타일링·프로 촬영까지 풀패키지.',
         'region_code': 'seoul', 'category_code': 'kpop', 'vendor_name': '서울 스튜디오 시그널',
         'base_price': 3_500_000, 'duration_minutes': 360, 'min_pax': 1, 'max_pax': 4,
-        'is_featured': True, 'tag_codes': ['luxury', 'private'],
+        'is_featured': True, 'is_monthly_popular': True,
+        'tag_codes': ['luxury', 'private'],
     },
 
     # 제주 외승
@@ -215,7 +220,8 @@ EXPERIENCES = [
         'description_ko': '초중급자 전용. 프라이빗 인스트럭터 1:1, 드레스 · 헬멧 제공. 오름 능선 외승 + 쉼터 티 세션.',
         'region_code': 'jeju', 'category_code': 'equestrian', 'vendor_name': '제주 승마 리트릿',
         'base_price': 1_800_000, 'duration_minutes': 180, 'min_pax': 1, 'max_pax': 2,
-        'is_featured': True, 'tag_codes': ['healing', 'private'],
+        'is_featured': True, 'is_new_arrival': True,
+        'tag_codes': ['healing', 'private'],
     },
     {
         'slug': 'jeju-beach-equestrian-sunset',
@@ -225,6 +231,7 @@ EXPERIENCES = [
         'description_ko': '중급자 이상 권장. 제주 서쪽 해변에서 선셋 시간대에 진행되는 외승. 개인 포토 세션 포함.',
         'region_code': 'jeju', 'category_code': 'equestrian', 'vendor_name': '제주 승마 리트릿',
         'base_price': 2_200_000, 'duration_minutes': 180, 'min_pax': 1, 'max_pax': 2,
+        'is_monthly_popular': True,
         'tag_codes': ['sunset', 'romance', 'healing'],
     },
 ]

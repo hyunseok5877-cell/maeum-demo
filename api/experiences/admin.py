@@ -79,18 +79,29 @@ class ExperienceScheduleInline(admin.TabularInline):
 class ExperienceAdmin(SummernoteModelAdmin):
     summernote_fields = ('content_html',)
     list_display = (
-        'title_ko', 'category', 'region', 'status', 'is_featured',
-        'base_price', 'discount_percentage', 'rating_avg', 'booking_count', 'published_at',
+        'title_ko', 'category', 'region', 'status',
+        'is_featured', 'is_monthly_popular', 'is_new_arrival', 'home_pick_order',
+        'base_price', 'discount_percentage', 'booking_count', 'published_at',
     )
-    list_filter = ('status', 'is_featured', 'category', 'country', 'region')
-    list_editable = ('status', 'is_featured', 'discount_percentage')
+    list_filter = (
+        'status', 'is_featured', 'is_monthly_popular', 'is_new_arrival',
+        'category', 'country', 'region',
+    )
+    list_editable = (
+        'status', 'is_featured', 'is_monthly_popular', 'is_new_arrival',
+        'home_pick_order', 'discount_percentage',
+    )
     search_fields = ('title_ko', 'title_en', 'slug')
     prepopulated_fields = {'slug': ('title_en',)}
     autocomplete_fields = ('country', 'region', 'category', 'vendor')
     filter_horizontal = ('tags',)
     inlines = [ExperienceMediaInline, ExperienceOptionInline, ExperienceScheduleInline]
     fieldsets = (
-        ('기본', {'fields': ('slug', 'title_ko', 'title_en', 'subtitle_ko', 'subtitle_en', 'status', 'is_featured')}),
+        ('기본', {'fields': ('slug', 'title_ko', 'title_en', 'subtitle_ko', 'subtitle_en', 'status')}),
+        ('노출 풀 (각각 독립 ON/OFF + 핀 순서)', {
+            'fields': ('is_featured', 'is_monthly_popular', 'is_new_arrival', 'home_pick_order'),
+            'description': '추천(마음 PICK) / 월간 인기 / 신상 — 셋 다 따로 켤 수 있음. home_pick_order는 작을수록 앞.',
+        }),
         ('분류', {'fields': ('country', 'region', 'category', 'vendor', 'tags')}),
         ('짧은 설명 (리스트·카드용)', {'fields': ('description_ko', 'description_en')}),
         ('상세 콘텐츠 (리치 에디터)', {'fields': ('content_html',)}),

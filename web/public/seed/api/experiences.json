@@ -48,6 +48,9 @@
       "available_to": null,
       "status": "active",
       "is_featured": false,
+      "is_monthly_popular": true,
+      "is_new_arrival": false,
+      "home_pick_order": null,
       "rating_avg": "0.00",
       "rating_count": 0
     },
@@ -96,6 +99,9 @@
       "available_to": null,
       "status": "active",
       "is_featured": true,
+      "is_monthly_popular": false,
+      "is_new_arrival": true,
+      "home_pick_order": null,
       "rating_avg": "0.00",
       "rating_count": 0
     },
@@ -144,6 +150,9 @@
       "available_to": null,
       "status": "active",
       "is_featured": true,
+      "is_monthly_popular": true,
+      "is_new_arrival": false,
+      "home_pick_order": null,
       "rating_avg": "0.00",
       "rating_count": 0
     },
@@ -192,6 +201,9 @@
       "available_to": null,
       "status": "active",
       "is_featured": false,
+      "is_monthly_popular": true,
+      "is_new_arrival": true,
+      "home_pick_order": null,
       "rating_avg": "0.00",
       "rating_count": 0
     },
@@ -240,6 +252,9 @@
       "available_to": null,
       "status": "active",
       "is_featured": true,
+      "is_monthly_popular": false,
+      "is_new_arrival": true,
+      "home_pick_order": 3,
       "rating_avg": "0.00",
       "rating_count": 0
     },
@@ -288,6 +303,9 @@
       "available_to": null,
       "status": "active",
       "is_featured": true,
+      "is_monthly_popular": true,
+      "is_new_arrival": false,
+      "home_pick_order": 1,
       "rating_avg": "0.00",
       "rating_count": 0
     },
@@ -336,6 +354,9 @@
       "available_to": null,
       "status": "active",
       "is_featured": true,
+      "is_monthly_popular": true,
+      "is_new_arrival": false,
+      "home_pick_order": 2,
       "rating_avg": "0.00",
       "rating_count": 0
     }

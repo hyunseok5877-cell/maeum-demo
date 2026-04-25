@@ -65,7 +65,8 @@ class ExperienceListSerializer(serializers.ModelSerializer):
             'base_price', 'discount_percentage', 'final_price', 'discount_amount',
             'currency', 'duration_minutes', 'min_pax', 'max_pax',
             'available_from', 'available_to',
-            'status', 'is_featured', 'rating_avg', 'rating_count',
+            'status', 'is_featured', 'is_monthly_popular', 'is_new_arrival',
+            'home_pick_order', 'rating_avg', 'rating_count',
         )
 
     def get_cover_image(self, obj):
