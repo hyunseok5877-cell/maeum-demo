@@ -18,6 +18,13 @@ interface Q {
   options: QOption[];
 }
 
+type ExistingResult = {
+  code: string;
+  name_ko: string;
+  name_en: string;
+  token: string;
+} | null;
+
 export default function QuizPage() {
   const router = useRouter();
   const [questions, setQuestions] = useState<Q[]>([]);
@@ -26,12 +33,28 @@ export default function QuizPage() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [existing, setExisting] = useState<ExistingResult>(null);
 
   useEffect(() => {
     fetch(`${API_BASE}/curation/quiz/questions/`)
       .then((r) => r.json())
       .then((d) => setQuestions(d.questions ?? []))
       .catch(() => setError("문항을 불러오지 못했습니다."));
+
+    // 로그인 사용자 + 이미 결과 있음 → "결과 보기 / 다시 하기" 분기
+    fetch(`${API_BASE}/me/profile/`, { credentials: "include" })
+      .then(async (r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d?.personality_type && d?.last_quiz_token) {
+          setExisting({
+            code: d.personality_type.code,
+            name_ko: d.personality_type.name_ko,
+            name_en: d.personality_type.name_en,
+            token: d.last_quiz_token,
+          });
+        }
+      })
+      .catch(() => {});
   }, []);
 
   const progress = questions.length ? ((idx) / questions.length) * 100 : 0;
@@ -49,6 +72,7 @@ export default function QuizPage() {
         const res = await fetch(`${API_BASE}/curation/quiz/submit/`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: JSON.stringify({ answers: next, opt_in: false }),
         });
         if (!res.ok) throw new Error("submit failed");
@@ -68,29 +92,70 @@ export default function QuizPage() {
         {!started ? (
           <section className="flex-1 flex flex-col justify-center px-8 md:px-16 py-24 max-w-3xl mx-auto">
             <p className="caption text-ink-muted mb-6">MAEUM · EXPERIENCE TEST</p>
-            <h1
-              className="font-[family-name:var(--font-serif)] text-ink mb-8"
-              style={{ fontSize: "clamp(40px, 6vw, 72px)", lineHeight: 1.05, letterSpacing: "-0.02em" }}
-            >
-              당신이 원하는 건
-              <br />
-              어떤 하루인가요?
-            </h1>
-            <p className="text-[18px] text-ink-muted leading-[1.8] mb-12">
-              6개의 질문으로 당신만의 경험 유형을 찾고,
-              <br />
-              큐레이터의 맞춤 제안을 받아보세요.
-              <br />
-              대략 1분이면 충분합니다.
-            </p>
-            <button
-              type="button"
-              onClick={() => setStarted(true)}
-              disabled={questions.length === 0}
-              className="self-start h-[60px] px-12 bg-ink text-ink-inverse font-medium hover:bg-black transition disabled:opacity-50"
-            >
-              {questions.length === 0 ? "불러오는 중..." : "테스트 시작"}
-            </button>
+            {existing ? (
+              <>
+                <h1
+                  className="font-[family-name:var(--font-serif)] text-ink mb-6"
+                  style={{ fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 1.1, letterSpacing: "-0.02em" }}
+                >
+                  당신의 성향은
+                  <br />
+                  <span className="text-brass italic">{existing.name_ko}</span>
+                  입니다.
+                </h1>
+                <p className="caption text-ink-muted mb-12">
+                  {existing.name_en} · {existing.code}
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    href={`/quiz/result/${existing.token}`}
+                    className="h-[60px] px-12 bg-ink text-ink-inverse font-medium hover:bg-black transition inline-flex items-center"
+                  >
+                    내 결과 보기 →
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setExisting(null);
+                      setStarted(true);
+                    }}
+                    disabled={questions.length === 0}
+                    className="h-[60px] px-12 border border-ink text-ink hover:bg-ink hover:text-ink-inverse transition disabled:opacity-50"
+                  >
+                    다시 테스트하기
+                  </button>
+                </div>
+                <p className="caption text-ink-muted mt-8">
+                  취향이 바뀌었거나 다시 분석받고 싶다면 언제든 다시 진행하세요.
+                </p>
+              </>
+            ) : (
+              <>
+                <h1
+                  className="font-[family-name:var(--font-serif)] text-ink mb-8"
+                  style={{ fontSize: "clamp(40px, 6vw, 72px)", lineHeight: 1.05, letterSpacing: "-0.02em" }}
+                >
+                  당신이 원하는 건
+                  <br />
+                  어떤 하루인가요?
+                </h1>
+                <p className="text-[18px] text-ink-muted leading-[1.8] mb-12">
+                  6개의 질문으로 당신만의 경험 유형을 찾고,
+                  <br />
+                  큐레이터의 맞춤 제안을 받아보세요.
+                  <br />
+                  대략 1분이면 충분합니다.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setStarted(true)}
+                  disabled={questions.length === 0}
+                  className="self-start h-[60px] px-12 bg-ink text-ink-inverse font-medium hover:bg-black transition disabled:opacity-50"
+                >
+                  {questions.length === 0 ? "불러오는 중..." : "테스트 시작"}
+                </button>
+              </>
+            )}
             {error && <p className="caption text-[color:var(--color-error)] mt-6">{error}</p>}
           </section>
         ) : current ? (

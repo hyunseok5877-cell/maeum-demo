@@ -1,25 +1,29 @@
 import type { Metadata } from "next";
-import { Inter, EB_Garamond, Playfair_Display } from "next/font/google";
+import { Chakra_Petch, JetBrains_Mono, Allura } from "next/font/google";
 import "./globals.css";
 import { RecentBookingsTicker } from "@/components/RecentBookingsTicker";
 
-const sans = Inter({
-  variable: "--font-sans",
+// Chakra Petch — 사이버 디스플레이 + 본문. 모든 weight 단일 패밀리로 통일.
+const cyber = Chakra_Petch({
+  variable: "--font-cyber",
   subsets: ["latin"],
-  display: "swap",
-});
-
-const serif = EB_Garamond({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "500", "700", "900"],
+  weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap",
+});
+
+// /about 페이지 시그니처 한 곳에만 사용
+const signature = Allura({
+  variable: "--font-signature",
+  subsets: ["latin"],
+  weight: ["400"],
   display: "swap",
 });
 
@@ -38,7 +42,7 @@ export default function RootLayout({
     <html
       lang="ko"
       data-scroll-behavior="smooth"
-      className={`${sans.variable} ${serif.variable} ${playfair.variable} h-full antialiased`}
+      className={`${cyber.variable} ${mono.variable} ${signature.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {children}

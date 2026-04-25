@@ -6,6 +6,13 @@ import { ExperienceCard } from "@/components/ExperienceCard";
 import type { ExperienceCard as ExperienceCardData } from "@/lib/api";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:8000/api";
+const IS_DEMO = process.env.NEXT_PUBLIC_DEMO === "1";
+
+export const dynamicParams = false;
+export async function generateStaticParams() {
+  // 데모 모드: 결과 페이지를 사전생성하지 않음 — 클라이언트가 라우트 직접 진입 못 함
+  return [{ token: "demo" }];
+}
 
 interface QuizResult {
   session_token: string;
@@ -21,6 +28,20 @@ interface QuizResult {
 }
 
 async function fetchResult(token: string): Promise<QuizResult | null> {
+  if (IS_DEMO) {
+    return {
+      session_token: token,
+      completed_at: new Date().toISOString(),
+      result_type: {
+        code: "DEMO",
+        name_ko: "데모 결과",
+        name_en: "Demo",
+        description: "데모 빌드에서는 실제 결과가 계산되지 않습니다. 풀 백엔드 환경에서 정확한 성향이 표시됩니다.",
+        image_url: "",
+      },
+      recommended_experiences: [],
+    };
+  }
   try {
     const res = await fetch(`${API_BASE}/curation/quiz/result/${token}/`, {
       cache: "no-store",

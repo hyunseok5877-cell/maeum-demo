@@ -3,6 +3,9 @@ import { getAllExperiences, getCategories } from "@/lib/api";
 import { ExperienceCard } from "@/components/ExperienceCard";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { ExperienceSearchBar } from "@/components/ExperienceSearchBar";
+import { CyberExperienceStrip } from "@/components/CyberExperienceStrip";
+import { Suspense } from "react";
 
 export const revalidate = 60;
 
@@ -11,114 +14,184 @@ export const metadata = {
   description: "슈퍼카 · 요트 · 프라이빗 외승 — 전 지역 큐레이션 경험",
 };
 
-export default async function ExperiencesIndex({
-  searchParams,
-}: {
-  searchParams: Promise<{ region?: string; category?: string }>;
-}) {
-  const params = await searchParams;
-  const [experiences, categories] = await Promise.all([
-    getAllExperiences({ region: params.region, category: params.category }),
+export default async function ExperiencesIndex() {
+  // Demo 정적 export 호환: searchParams 제거 — 필터링은 클라이언트에서 처리
+  const [all, categories] = await Promise.all([
+    getAllExperiences(),
     getCategories(),
   ]);
 
-  const activeCategory = params.category ?? "";
-  const regionFilter = params.region ?? "";
+  const activeCategory: string = "";
+  const regionFilter: string = "";
+  const filtered: string = "";
 
-  function chipHref(code?: string) {
-    const qs = new URLSearchParams();
-    if (regionFilter) qs.set("region", regionFilter);
-    if (code) qs.set("category", code);
-    const s = qs.toString();
-    return s ? `/experiences?${s}` : "/experiences";
-  }
+  const maeumPick = [...all].filter((e) => e.is_featured).slice(0, 8);
+  const monthlyHot = [...all]
+    .sort(
+      (a, b) =>
+        Number(b.rating_avg) * b.rating_count -
+        Number(a.rating_avg) * a.rating_count
+    )
+    .slice(0, 8);
+  const newArrivals = [...all].slice().reverse().slice(0, 8);
 
   return (
     <>
       <SiteHeader variant="solid" />
-      <main className="flex-1 pt-[72px]">
-        <section className="pt-24 pb-16 px-8 md:px-16 border-b border-line">
+      <main className="flex-1 pt-[72px] bg-bg">
+        {/* 상단: 검색바 + 카테고리 칩 */}
+        <section className="pt-14 pb-12 px-6 md:px-12 bg-bg border-b border-line">
           <div className="max-w-7xl mx-auto">
-            <p className="caption text-ink-muted mb-4">EXPERIENCES · CURATED</p>
-            <h1
-              className="font-[family-name:var(--font-serif)] text-ink"
-              style={{ fontSize: "clamp(40px, 6vw, 72px)", lineHeight: 1.05, letterSpacing: "-0.02em" }}
-            >
-              꿈꾸던 하루를
-              <br />
-              골라주세요.
-            </h1>
-            <p className="mt-8 max-w-2xl text-[18px] text-ink-muted leading-[1.6]">
-              모든 경험은 큐레이터의 손을 거쳐 소개됩니다.
-              한 번에 한 순간만 제공하기에, 예약은 조용히 이뤄집니다.
-            </p>
-
-            {/* 카테고리 탭 */}
-            <div className="mt-14 flex flex-wrap gap-3">
-              <Link
-                href={chipHref()}
-                className={`px-6 h-[44px] inline-flex items-center border transition ${
-                  !activeCategory
-                    ? "bg-ink text-ink-inverse border-ink"
-                    : "border-line text-ink hover:border-ink"
-                }`}
+            <div className="mb-8 text-center">
+              <p className="caption text-ink-muted">EXPERIENCES · CURATED</p>
+              <h1
+                className="mt-5 font-[family-name:var(--font-display)] text-ink"
+                style={{
+                  fontSize: "clamp(28px, 4.5vw, 56px)",
+                  lineHeight: 1.08,
+                  letterSpacing: "-0.02em",
+                }}
               >
-                전체
-              </Link>
-              {categories.map((c) => {
-                const selected = activeCategory === c.code;
-                return (
-                  <Link
-                    key={c.id}
-                    href={chipHref(c.code)}
-                    className={`px-6 h-[44px] inline-flex items-center border transition ${
-                      selected
-                        ? "bg-ink text-ink-inverse border-ink"
-                        : "border-line text-ink hover:border-ink"
-                    }`}
-                  >
-                    {c.name_ko}
-                  </Link>
-                );
-              })}
+                새로운 경험을 떠날 준비가 되셨나요?
+              </h1>
             </div>
 
-            {regionFilter && (
-              <div className="mt-6 flex items-center gap-4">
-                <span className="caption text-ink-muted">REGION</span>
-                <span className="px-3 py-1 bg-muted-bg caption">{regionFilter.toUpperCase()}</span>
-                <Link href={chipHref(activeCategory)} className="caption text-ink-muted hover:text-ink">
-                  지역 해제 ×
+            <Suspense fallback={<div className="h-[80px]" />}>
+              <ExperienceSearchBar />
+            </Suspense>
+
+            {(activeCategory || regionFilter) && (
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+                {activeCategory && (
+                  <span className="px-3 py-1 caption bg-white border border-line">
+                    {categories.find((c) => c.code === activeCategory)
+                      ?.name_ko ?? activeCategory.toUpperCase()}
+                  </span>
+                )}
+                {regionFilter && (
+                  <span className="px-3 py-1 caption bg-white border border-line">
+                    {regionFilter.toUpperCase()}
+                  </span>
+                )}
+                <Link
+                  href="/experiences"
+                  className="caption hover:text-brass transition"
+                >
+                  필터 해제 ×
                 </Link>
               </div>
             )}
           </div>
         </section>
 
-        {experiences.length === 0 ? (
-          <section className="py-[120px] px-8 text-center">
-            <p className="text-ink-muted">현재 조건에 맞는 경험이 없습니다.</p>
-            <Link href="/experiences" className="caption text-ink underline mt-4 inline-block">
-              필터 해제
-            </Link>
-          </section>
-        ) : (
-          <section className="py-[96px] px-8 md:px-16">
+        {/* 검색바 바로 아래 — 사이버·게이밍 스트립 */}
+        {!filtered && all.length > 0 && (
+          <CyberExperienceStrip items={all.slice(0, 18)} />
+        )}
+
+        {filtered ? (
+          <section className="py-[72px] px-6 md:px-12 bg-white">
             <div className="max-w-7xl mx-auto">
               <p className="caption text-ink-muted mb-10">
-                {experiences.length} EXPERIENCES
-                {activeCategory && ` · ${categories.find((c) => c.code === activeCategory)?.name_ko ?? ""}`}
+                {all.length} EXPERIENCES
+                {activeCategory &&
+                  ` · ${
+                    categories.find((c) => c.code === activeCategory)?.name_ko ??
+                    ""
+                  }`}
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {experiences.map((exp) => (
-                  <ExperienceCard key={exp.id} exp={exp} />
-                ))}
-              </div>
+              {all.length === 0 ? (
+                <div className="py-20 text-center">
+                  <p className="text-ink-muted">
+                    현재 조건에 맞는 경험이 없습니다.
+                  </p>
+                  <Link
+                    href="/experiences"
+                    className="caption text-ink underline mt-4 inline-block"
+                  >
+                    필터 해제
+                  </Link>
+                </div>
+              ) : (
+                <div className="cat-grid">
+                  {all.map((exp) => (
+                    <ExperienceCard key={exp.id} exp={exp} />
+                  ))}
+                </div>
+              )}
             </div>
           </section>
+        ) : (
+          <>
+            <CategoryRail
+              tag="Maeum Recommended"
+              title="마음 추천"
+              subtitle="큐레이터가 직접 고른 이달의 시그니처."
+              items={maeumPick}
+            />
+            <CategoryRail
+              tag="Monthly Popular"
+              title="월간 인기"
+              subtitle="이번 달 가장 많이 예약된 경험."
+              items={monthlyHot}
+            />
+            <CategoryRail
+              tag="New Curators"
+              title="신규 큐레이터"
+              subtitle="최근 합류한 큐레이터의 첫 제안."
+              items={newArrivals}
+            />
+          </>
         )}
       </main>
       <SiteFooter />
     </>
+  );
+}
+
+function CategoryRail({
+  tag,
+  title,
+  subtitle,
+  items,
+}: {
+  tag: string;
+  title: string;
+  subtitle: string;
+  items: Awaited<ReturnType<typeof getAllExperiences>>;
+}) {
+  if (items.length === 0) return null;
+  return (
+    <section className="py-[72px] px-6 md:px-12 bg-white border-t border-line">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+          <div>
+            <p className="caption text-brass">{tag}</p>
+            <h2
+              className="mt-3 font-[family-name:var(--font-display)] text-ink"
+              style={{
+                fontSize: "clamp(28px, 4vw, 48px)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              {title}
+            </h2>
+            <p className="mt-3 text-[15px] text-ink-muted">{subtitle}</p>
+          </div>
+          <Link
+            href="/experiences"
+            className="caption self-start md:self-end text-ink hover:text-brass transition"
+          >
+            일정 전체보기 →
+          </Link>
+        </div>
+        <div className="cat-rail">
+          {items.map((exp) => (
+            <ExperienceCard key={exp.id} exp={exp} />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

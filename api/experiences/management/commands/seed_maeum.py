@@ -54,6 +54,12 @@ CATEGORIES = [
      'description': '자연 속 프리미엄 야외 승마 세션.'},
     {'code': 'kpop', 'name_ko': 'K-pop 컬처', 'name_en': 'K-pop Culture', 'icon': 'music', 'display_order': 4,
      'description': '한국 엔터테인먼트 산업의 현장 — 스튜디오·레코딩·안무 세션.'},
+    {'code': 'sports', 'name_ko': '스포츠', 'name_en': 'Sports', 'icon': 'trophy', 'display_order': 5,
+     'description': '프라이빗 레슨·관람·투어링 — 골프·테니스·서핑 중심.'},
+    {'code': 'drive', 'name_ko': '드라이브', 'name_en': 'Scenic Drive', 'icon': 'road', 'display_order': 6,
+     'description': '라이프스타일 드라이브 — 루트 큐레이션과 사진 포인트 포함.'},
+    {'code': 'food', 'name_ko': '음식', 'name_en': 'Gastronomy', 'icon': 'utensils', 'display_order': 7,
+     'description': '프라이빗 다이닝·파인 쿠킹 클래스·셰프 동행 마켓 투어링.'},
 ]
 
 TAGS = [
@@ -86,14 +92,61 @@ MEMBERSHIP_TIERS = [
 ]
 
 PERSONALITY_TYPES = [
-    {'code': 'NOCTURNE_LUXE', 'name_ko': '야행성 럭셔리파', 'name_en': 'Nocturne Luxe',
-     'description': '해가 진 뒤 빛나는 도시에서 당신의 밤을 설계합니다.'},
-    {'code': 'DAWN_HEAL', 'name_ko': '새벽의 정원사', 'name_en': 'Dawn Healer',
-     'description': '고요한 아침, 자연이 먼저 깨어나는 순간을 선호합니다.'},
-    {'code': 'THRILL_RIDER', 'name_ko': '드라이브 스릴 시커', 'name_en': 'Thrill Rider',
-     'description': '속도와 몰입이 주는 아드레날린 — 짜릿한 몇 시간의 지배자.'},
-    {'code': 'ROMANCE_ARCHITECT', 'name_ko': '로맨스 설계자', 'name_en': 'Romance Architect',
-     'description': '특별한 사람과 단 한 번뿐인 순간을 연출하고 싶은 당신.'},
+    {
+        'code': 'NOCTURNE_LUXE',
+        'name_ko': '야행성 럭셔리파',
+        'name_en': 'Nocturne Luxe',
+        'description': (
+            '해가 진 뒤 빛나는 도시에서 당신의 밤을 설계하는 사람. '
+            '낮의 분주함보다 야경·조도·정적이 흐르는 공간에서 진짜 자기다움을 느끼는군요. '
+            '대중적 핫플레이스보다 비공개·예약제·소수만 아는 곳을 선호하고, '
+            '돈보다는 분위기와 디테일 — 누가 함께였는지, 그날 음악이 무엇이었는지 — 가 더 오래 남는 가치라고 믿습니다. '
+            '즉흥적인 자유로움보다는 미리 그려둔 동선 안에서 자유롭고 싶은, '
+            '계획적 큐레이션을 좋아하는 분이에요. '
+            '도시 야경 드라이브·심야 요트·프라이빗 라운지·시그니처 디너에 강점이 있고, '
+            '조용히 빛나는 비공개 경험을 좋아하시니 아래와 같은 큐레이션을 추천드립니다.'
+        ),
+    },
+    {
+        'code': 'DAWN_HEAL',
+        'name_ko': '새벽의 정원사',
+        'name_en': 'Dawn Healer',
+        'description': (
+            '고요한 아침, 자연이 먼저 깨어나는 순간을 선호하는 사람. '
+            '시끄러운 자극보다 호흡이 깊어지는 시간 속에서 자신을 회복하는 분이에요. '
+            '소비 그 자체보다 마음의 평정·관계의 깊이·자연과의 연결을 더 큰 가치로 여기고, '
+            '한 번에 많은 일정을 욱여넣기보다 하나의 순간을 충분히 머물러 음미하는 계획적인 여유를 좋아합니다. '
+            '외승·해변 산책·요가·온천·시그니처 티 세션에 강점이 있고, '
+            '아침의 결을 살리는 차분한 큐레이션을 선호하시니 아래와 같은 경험을 추천드립니다.'
+        ),
+    },
+    {
+        'code': 'THRILL_RIDER',
+        'name_ko': '드라이브 스릴 시커',
+        'name_en': 'Thrill Rider',
+        'description': (
+            '속도와 몰입이 주는 아드레날린 — 짜릿한 몇 시간의 지배자. '
+            '안락한 정적보다 심장이 뛰는 강렬한 자극에서 가장 자기다움을 느끼는 분이에요. '
+            '돈보다는 그 순간의 강도와 진짜 경험만이 줄 수 있는 감각의 가치를 우선합니다. '
+            '계획을 짜되 그 안에서 즉흥적 변주와 도전을 즐기는 균형형. '
+            '슈퍼카 트랙·서킷 드라이빙·요트 스피드 세션·헬리콥터 투어에 강점이 있고, '
+            '강렬한 몰입을 좋아하시니 아래와 같은 큐레이션을 추천드립니다.'
+        ),
+    },
+    {
+        'code': 'ROMANCE_ARCHITECT',
+        'name_ko': '로맨스 설계자',
+        'name_en': 'Romance Architect',
+        'description': (
+            '특별한 사람과 단 한 번뿐인 순간을 연출하고 싶은 사람. '
+            '로맨스를 중시하고 관계의 깊이와 정서적 의미를 가장 큰 가치로 여기는 분이에요. '
+            '돈보다는 가치를 — 그 사람이 평생 기억할 한 장면을 만드는 일에 자원을 쓰는 것을 아끼지 않습니다. '
+            '즉흥적인 것보다는 디테일을 미리 설계하는 계획적 로맨티스트. '
+            '선셋 프라이빗 요트·프로포즈 디너·남산 야경 드라이브·해변 외승 등 '
+            '두 사람만의 무대를 연출하는 데 강점이 있고, '
+            '의미 있는 한 장면을 디자인하는 큐레이션을 좋아하시니 아래와 같은 경험을 추천드립니다.'
+        ),
+    },
 ]
 
 EXPERIENCES = [

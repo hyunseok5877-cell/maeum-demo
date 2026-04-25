@@ -11,7 +11,27 @@ class PersonalityType(TimestampedModel):
     code = models.CharField(max_length=30, unique=True)
     name_ko = models.CharField(max_length=50)
     name_en = models.CharField(max_length=50, blank=True, default='')
-    description = models.TextField(blank=True, default='')
+    description = models.TextField(blank=True, default='', help_text='한 줄 요약 (배너용)')
+    traits = models.JSONField(
+        default=list, blank=True,
+        help_text='성향 키워드 리스트 (예: ["조용함","섬세함","느린 리듬"])'
+    )
+    long_description = models.TextField(
+        blank=True, default='',
+        help_text='"이런 타입의 사람은 … 한 경향이 있습니다" 3~5 문장'
+    )
+    why_fits = models.TextField(
+        blank=True, default='',
+        help_text='"그래서 이런 경험이 어울립니다" 3~5 문장'
+    )
+    recommended_categories = models.JSONField(
+        default=list, blank=True,
+        help_text='추천 카테고리 코드 리스트 (카드 필터 힌트)'
+    )
+    avoid_note = models.TextField(
+        blank=True, default='',
+        help_text='피하면 좋을 경험 유형 (선택)'
+    )
     hero_experiences = models.ManyToManyField(
         'experiences.Experience', blank=True, related_name='hero_for_types'
     )

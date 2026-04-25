@@ -1,0 +1,82 @@
+{
+  "id": 5,
+  "slug": "jeju-private-equestrian-oreum",
+  "title_ko": "제주 오름 프라이빗 외승",
+  "title_en": "Jeju Oreum Private Equestrian",
+  "subtitle_ko": "제주 오름의 능선 위에서 만나는 말의 호흡",
+  "description_ko": "초중급자 전용. 프라이빗 인스트럭터 1:1, 드레스 · 헬멧 제공. 오름 능선 외승 + 쉼터 티 세션.",
+  "region": {
+    "id": 3,
+    "code": "jeju",
+    "name_ko": "제주",
+    "name_en": "Jeju",
+    "lat": "33.499600",
+    "lng": "126.531200",
+    "country": {
+      "code": "KR",
+      "name_ko": "한국",
+      "name_en": "Korea",
+      "is_active": true,
+      "display_order": 1
+    },
+    "is_active": true
+  },
+  "category": {
+    "id": 3,
+    "code": "equestrian",
+    "name_ko": "프라이빗 외승",
+    "name_en": "Private Equestrian",
+    "icon": "horse",
+    "description": "자연 속 프리미엄 야외 승마 세션.",
+    "display_order": 3
+  },
+  "cover_image": "https://source.unsplash.com/1600x900/?private equestrian,luxury",
+  "base_price": "1800000",
+  "discount_percentage": 0,
+  "final_price": 1800000,
+  "discount_amount": 0,
+  "currency": "KRW",
+  "duration_minutes": 180,
+  "min_pax": 1,
+  "max_pax": 2,
+  "available_from": null,
+  "available_to": null,
+  "status": "active",
+  "is_featured": true,
+  "rating_avg": "0.00",
+  "rating_count": 0,
+  "content_html": "",
+  "description_en": "",
+  "cancellation_policy": "",
+  "advance_booking_days": 3,
+  "media": [
+    {
+      "id": 5,
+      "type": "image",
+      "src": "https://source.unsplash.com/1600x900/?private equestrian,luxury",
+      "display_order": 0,
+      "alt_text": "제주 오름 프라이빗 외승",
+      "is_cover": true
+    }
+  ],
+  "options": [],
+  "tags": [
+    {
+      "id": 4,
+      "code": "healing",
+      "name_ko": "힐링"
+    },
+    {
+      "id": 6,
+      "code": "private",
+      "name_ko": "프라이빗"
+    }
+  ],
+  "vendor": {
+    "id": 3,
+    "name": "제주 승마 리트릿"
+  },
+  "seo_meta_title": "",
+  "seo_meta_description": "",
+  "published_at": "2026-04-25T14:39:03.002842+09:00"
+}

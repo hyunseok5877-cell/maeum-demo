@@ -1,11 +1,18 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
-import { getExperienceBySlug, formatKRW, formatDuration } from "@/lib/api";
+import { Suspense } from "react";
+import { getExperienceBySlug, getAllExperiences, formatKRW, formatDuration } from "@/lib/api";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { ExperienceActions } from "@/components/ExperienceActions";
+import { ExperienceGallery } from "@/components/ExperienceGallery";
 
-export const revalidate = 60;
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const all = await getAllExperiences();
+  return all.map((e) => ({ slug: e.slug }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -36,56 +43,14 @@ export default async function ExperienceDetail({
       <SiteHeader variant="solid" />
 
       <main className="flex-1 pt-[72px]">
-        {/* Gallery */}
-        <section className="px-0 md:px-8">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 md:mt-8">
-            <div className="md:col-span-2 relative aspect-[9/5] bg-muted-bg overflow-hidden">
-              {cover ? (
-                <Image
-                  src={cover}
-                  alt={exp.title_ko}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 66vw"
-                  className="object-cover"
-                  priority
-                  unoptimized
-                />
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center text-ink-muted caption">
-                  NO IMAGE
-                </div>
-              )}
-              {hasDiscount && (
-                <span className="absolute top-4 left-4 bg-ink text-ink-inverse caption px-3 py-1.5">
-                  {exp.discount_percentage}% OFF
-                </span>
-              )}
-            </div>
-            <div className="hidden md:grid gap-4">
-              {[0, 1].map((i) => {
-                const m = gallery[i + 1];
-                return (
-                  <div key={i} className="relative aspect-[16/10] bg-muted-bg overflow-hidden">
-                    {m?.src ? (
-                      <Image
-                        src={m.src}
-                        alt={m.alt_text || exp.title_ko}
-                        fill
-                        sizes="33vw"
-                        className="object-cover"
-                        unoptimized
-                      />
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center text-ink-muted caption">
-                        —
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        {/* Gallery — 4+ 사진은 +N 오버레이 + 라이트박스 */}
+        <ExperienceGallery
+          cover={cover}
+          images={gallery}
+          title={exp.title_ko}
+          hasDiscount={hasDiscount}
+          discountPercentage={exp.discount_percentage}
+        />
 
         {/* Title + CTA Row */}
         <section className="px-8 md:px-16 pt-16 pb-8">
@@ -182,14 +147,15 @@ export default async function ExperienceDetail({
                     </div>
                   )}
                 </dl>
-                <Link
-                  href="/request-curation"
-                  className="block w-full h-[52px] bg-ink text-ink-inverse font-medium flex items-center justify-center hover:bg-black transition"
-                >
-                  문의하기
-                </Link>
+                <Suspense fallback={<div className="h-[120px]" />}>
+                  <ExperienceActions
+                    slug={exp.slug}
+                    title={exp.title_ko}
+                    finalPrice={exp.final_price}
+                  />
+                </Suspense>
                 <p className="caption text-ink-muted mt-4 text-center">
-                  담당 큐레이터가 24~48시간 내 회신합니다.
+                  데모 예약은 결제 없이 즉시 확정 — 마이페이지 &gt; 예약 내역에서 확인.
                 </p>
               </div>
             </aside>

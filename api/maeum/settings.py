@@ -120,6 +120,13 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     o.strip() for o in os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:3000,http://localhost:3001').split(',') if o.strip()
 ]
+# 쿠키 세션을 CORS 로 전달하려면 반드시 True + fetch credentials:'include' 동시 필요
+CORS_ALLOW_CREDENTIALS = True
+# 개발·데모: 크로스 오리진 쿠키 허용 (프로덕션은 도메인 동일화 권장)
+SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SECURE = False  # HTTPS 전환 시 True
+CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
 
 
 # Summernote (네이버 블로그 스타일 리치 에디터)

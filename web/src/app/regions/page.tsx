@@ -47,13 +47,7 @@ export default async function RegionsPage() {
         {/* Interactive regions */}
         <section className="py-[96px] px-8 md:px-16 border-b border-line">
           <div className="max-w-7xl mx-auto">
-            <div className="flex justify-between items-end mb-12">
-              <h2
-                className="font-[family-name:var(--font-serif)] text-ink"
-                style={{ fontSize: "clamp(28px, 3.5vw, 40px)", lineHeight: 1.12 }}
-              >
-                운영 중
-              </h2>
+            <div className="flex justify-end items-end mb-12">
               <span className="caption text-ink-muted">
                 {activeRegions.length} ACTIVE REGIONS
               </span>

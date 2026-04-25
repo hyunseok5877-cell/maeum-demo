@@ -1,0 +1,87 @@
+{
+  "id": 3,
+  "slug": "busan-haeundae-private-yacht-sunset",
+  "title_ko": "해운대 프라이빗 요트 선셋",
+  "title_en": "Haeundae Private Yacht Sunset",
+  "subtitle_ko": "해운대 앞바다에서 광안대교 위 노을을 마주하다",
+  "description_ko": "해운대 수영만에서 출항해 광안대교 루트로 선셋 차터. 샴페인 1병 포함, 식사 업그레이드 가능.",
+  "region": {
+    "id": 2,
+    "code": "busan",
+    "name_ko": "부산",
+    "name_en": "Busan",
+    "lat": "35.179600",
+    "lng": "129.075600",
+    "country": {
+      "code": "KR",
+      "name_ko": "한국",
+      "name_en": "Korea",
+      "is_active": true,
+      "display_order": 1
+    },
+    "is_active": true
+  },
+  "category": {
+    "id": 2,
+    "code": "yacht",
+    "name_ko": "요트",
+    "name_en": "Yacht",
+    "icon": "anchor",
+    "description": "프라이빗 요트 차터 · 선셋 · 디너.",
+    "display_order": 2
+  },
+  "cover_image": "https://source.unsplash.com/1600x900/?yacht,luxury",
+  "base_price": "2400000",
+  "discount_percentage": 0,
+  "final_price": 2400000,
+  "discount_amount": 0,
+  "currency": "KRW",
+  "duration_minutes": 180,
+  "min_pax": 2,
+  "max_pax": 8,
+  "available_from": null,
+  "available_to": null,
+  "status": "active",
+  "is_featured": true,
+  "rating_avg": "0.00",
+  "rating_count": 0,
+  "content_html": "",
+  "description_en": "",
+  "cancellation_policy": "",
+  "advance_booking_days": 3,
+  "media": [
+    {
+      "id": 3,
+      "type": "image",
+      "src": "https://source.unsplash.com/1600x900/?yacht,luxury",
+      "display_order": 0,
+      "alt_text": "해운대 프라이빗 요트 선셋",
+      "is_cover": true
+    }
+  ],
+  "options": [],
+  "tags": [
+    {
+      "id": 1,
+      "code": "luxury",
+      "name_ko": "럭셔리"
+    },
+    {
+      "id": 3,
+      "code": "romance",
+      "name_ko": "로맨틱"
+    },
+    {
+      "id": 5,
+      "code": "sunset",
+      "name_ko": "선셋"
+    }
+  ],
+  "vendor": {
+    "id": 2,
+    "name": "부산 블루 마리나"
+  },
+  "seo_meta_title": "",
+  "seo_meta_description": "",
+  "published_at": "2026-04-25T14:39:02.999879+09:00"
+}

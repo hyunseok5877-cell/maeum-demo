@@ -1,0 +1,135 @@
+{
+  "count": 8,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 1,
+      "code": "seoul",
+      "name_ko": "서울",
+      "name_en": "Seoul",
+      "lat": "37.566500",
+      "lng": "126.978000",
+      "country": {
+        "code": "KR",
+        "name_ko": "한국",
+        "name_en": "Korea",
+        "is_active": true,
+        "display_order": 1
+      },
+      "is_active": true
+    },
+    {
+      "id": 2,
+      "code": "busan",
+      "name_ko": "부산",
+      "name_en": "Busan",
+      "lat": "35.179600",
+      "lng": "129.075600",
+      "country": {
+        "code": "KR",
+        "name_ko": "한국",
+        "name_en": "Korea",
+        "is_active": true,
+        "display_order": 1
+      },
+      "is_active": true
+    },
+    {
+      "id": 3,
+      "code": "jeju",
+      "name_ko": "제주",
+      "name_en": "Jeju",
+      "lat": "33.499600",
+      "lng": "126.531200",
+      "country": {
+        "code": "KR",
+        "name_ko": "한국",
+        "name_en": "Korea",
+        "is_active": true,
+        "display_order": 1
+      },
+      "is_active": true
+    },
+    {
+      "id": 4,
+      "code": "gangwon",
+      "name_ko": "강원",
+      "name_en": "Gangwon",
+      "lat": "37.822800",
+      "lng": "128.155500",
+      "country": {
+        "code": "KR",
+        "name_ko": "한국",
+        "name_en": "Korea",
+        "is_active": true,
+        "display_order": 1
+      },
+      "is_active": true
+    },
+    {
+      "id": 5,
+      "code": "gyeonggi",
+      "name_ko": "경기",
+      "name_en": "Gyeonggi",
+      "lat": "37.413800",
+      "lng": "127.518300",
+      "country": {
+        "code": "KR",
+        "name_ko": "한국",
+        "name_en": "Korea",
+        "is_active": true,
+        "display_order": 1
+      },
+      "is_active": true
+    },
+    {
+      "id": 6,
+      "code": "jeonnam",
+      "name_ko": "전남",
+      "name_en": "Jeonnam",
+      "lat": "34.867900",
+      "lng": "126.991000",
+      "country": {
+        "code": "KR",
+        "name_ko": "한국",
+        "name_en": "Korea",
+        "is_active": true,
+        "display_order": 1
+      },
+      "is_active": true
+    },
+    {
+      "id": 7,
+      "code": "gyeongbuk",
+      "name_ko": "경북",
+      "name_en": "Gyeongbuk",
+      "lat": "36.491900",
+      "lng": "128.888900",
+      "country": {
+        "code": "KR",
+        "name_ko": "한국",
+        "name_en": "Korea",
+        "is_active": true,
+        "display_order": 1
+      },
+      "is_active": true
+    },
+    {
+      "id": 8,
+      "code": "incheon",
+      "name_ko": "인천",
+      "name_en": "Incheon",
+      "lat": "37.456300",
+      "lng": "126.705200",
+      "country": {
+        "code": "KR",
+        "name_ko": "한국",
+        "name_en": "Korea",
+        "is_active": true,
+        "display_order": 1
+      },
+      "is_active": true
+    }
+  ]
+}

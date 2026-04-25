@@ -1,0 +1,87 @@
+{
+  "id": 6,
+  "slug": "jeju-beach-equestrian-sunset",
+  "title_ko": "제주 바닷가 선셋 외승",
+  "title_en": "Jeju Beach Sunset Equestrian",
+  "subtitle_ko": "해가 바다로 내려앉는 순간, 파도 옆의 말 걸음",
+  "description_ko": "중급자 이상 권장. 제주 서쪽 해변에서 선셋 시간대에 진행되는 외승. 개인 포토 세션 포함.",
+  "region": {
+    "id": 3,
+    "code": "jeju",
+    "name_ko": "제주",
+    "name_en": "Jeju",
+    "lat": "33.499600",
+    "lng": "126.531200",
+    "country": {
+      "code": "KR",
+      "name_ko": "한국",
+      "name_en": "Korea",
+      "is_active": true,
+      "display_order": 1
+    },
+    "is_active": true
+  },
+  "category": {
+    "id": 3,
+    "code": "equestrian",
+    "name_ko": "프라이빗 외승",
+    "name_en": "Private Equestrian",
+    "icon": "horse",
+    "description": "자연 속 프리미엄 야외 승마 세션.",
+    "display_order": 3
+  },
+  "cover_image": "https://source.unsplash.com/1600x900/?private equestrian,luxury",
+  "base_price": "2200000",
+  "discount_percentage": 0,
+  "final_price": 2200000,
+  "discount_amount": 0,
+  "currency": "KRW",
+  "duration_minutes": 180,
+  "min_pax": 1,
+  "max_pax": 2,
+  "available_from": null,
+  "available_to": null,
+  "status": "active",
+  "is_featured": false,
+  "rating_avg": "0.00",
+  "rating_count": 0,
+  "content_html": "",
+  "description_en": "",
+  "cancellation_policy": "",
+  "advance_booking_days": 3,
+  "media": [
+    {
+      "id": 6,
+      "type": "image",
+      "src": "https://source.unsplash.com/1600x900/?private equestrian,luxury",
+      "display_order": 0,
+      "alt_text": "제주 바닷가 선셋 외승",
+      "is_cover": true
+    }
+  ],
+  "options": [],
+  "tags": [
+    {
+      "id": 3,
+      "code": "romance",
+      "name_ko": "로맨틱"
+    },
+    {
+      "id": 4,
+      "code": "healing",
+      "name_ko": "힐링"
+    },
+    {
+      "id": 5,
+      "code": "sunset",
+      "name_ko": "선셋"
+    }
+  ],
+  "vendor": {
+    "id": 3,
+    "name": "제주 승마 리트릿"
+  },
+  "seo_meta_title": "",
+  "seo_meta_description": "",
+  "published_at": "2026-04-25T14:39:03.003779+09:00"
+}

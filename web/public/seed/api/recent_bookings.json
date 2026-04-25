@@ -1,0 +1,84 @@
+{
+  "results": [
+    {
+      "id": 14,
+      "masked_id": "wi**st",
+      "experience_title": "페라리 선셋 남산 루트",
+      "experience_slug": "ferrari-sunset-namsan",
+      "region_ko": "서울",
+      "created_at": "2026-04-25T05:43:38.644244+00:00"
+    },
+    {
+      "id": 13,
+      "masked_id": "au**zn",
+      "experience_title": "K-pop 서울 프라이빗 스튜디오 세션",
+      "experience_slug": "kpop-seoul-private-studio-session",
+      "region_ko": "서울",
+      "created_at": "2026-04-25T05:43:09.200080+00:00"
+    },
+    {
+      "id": 11,
+      "masked_id": "ha**.j",
+      "experience_title": "제주 오름 프라이빗 외승",
+      "experience_slug": "jeju-private-equestrian-oreum",
+      "region_ko": "제주",
+      "created_at": "2026-04-24T04:58:56.711675+00:00"
+    },
+    {
+      "id": 8,
+      "masked_id": "so**ng",
+      "experience_title": "부산 심야 요트 & 샴페인",
+      "experience_slug": "busan-night-yacht-champagne",
+      "region_ko": "부산",
+      "created_at": "2026-04-24T03:25:56.711675+00:00"
+    },
+    {
+      "id": 7,
+      "masked_id": "mi**.k",
+      "experience_title": "K-pop 서울 프라이빗 스튜디오 세션",
+      "experience_slug": "kpop-seoul-private-studio-session",
+      "region_ko": "서울",
+      "created_at": "2026-04-24T02:19:56.711675+00:00"
+    },
+    {
+      "id": 2,
+      "masked_id": "ye**.p",
+      "experience_title": "부산 심야 요트 & 샴페인",
+      "experience_slug": "busan-night-yacht-champagne",
+      "region_ko": "부산",
+      "created_at": "2026-04-23T17:28:56.711675+00:00"
+    },
+    {
+      "id": 9,
+      "masked_id": "ta**.n",
+      "experience_title": "페라리 선셋 남산 루트",
+      "experience_slug": "ferrari-sunset-namsan",
+      "region_ko": "서울",
+      "created_at": "2026-04-23T12:37:56.711675+00:00"
+    },
+    {
+      "id": 4,
+      "masked_id": "ta**.n",
+      "experience_title": "K-pop 서울 프라이빗 스튜디오 세션",
+      "experience_slug": "kpop-seoul-private-studio-session",
+      "region_ko": "서울",
+      "created_at": "2026-04-23T09:35:56.711675+00:00"
+    },
+    {
+      "id": 6,
+      "masked_id": "se**.l",
+      "experience_title": "제주 오름 프라이빗 외승",
+      "experience_slug": "jeju-private-equestrian-oreum",
+      "region_ko": "제주",
+      "created_at": "2026-04-23T09:35:56.711675+00:00"
+    },
+    {
+      "id": 10,
+      "masked_id": "mi**.k",
+      "experience_title": "해운대 프라이빗 요트 선셋",
+      "experience_slug": "busan-haeundae-private-yacht-sunset",
+      "region_ko": "부산",
+      "created_at": "2026-04-23T08:51:56.711675+00:00"
+    }
+  ]
+}

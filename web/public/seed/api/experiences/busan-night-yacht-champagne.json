@@ -1,0 +1,87 @@
+{
+  "id": 4,
+  "slug": "busan-night-yacht-champagne",
+  "title_ko": "부산 심야 요트 & 샴페인",
+  "title_en": "Busan Night Yacht & Champagne",
+  "subtitle_ko": "광안대교 조명이 바다 위로 쏟아지는 시간",
+  "description_ko": "야간 차터. 보조 셰프 옵션으로 간단한 카나페 서비스. 블랙타이 드레스코드 권장.",
+  "region": {
+    "id": 2,
+    "code": "busan",
+    "name_ko": "부산",
+    "name_en": "Busan",
+    "lat": "35.179600",
+    "lng": "129.075600",
+    "country": {
+      "code": "KR",
+      "name_ko": "한국",
+      "name_en": "Korea",
+      "is_active": true,
+      "display_order": 1
+    },
+    "is_active": true
+  },
+  "category": {
+    "id": 2,
+    "code": "yacht",
+    "name_ko": "요트",
+    "name_en": "Yacht",
+    "icon": "anchor",
+    "description": "프라이빗 요트 차터 · 선셋 · 디너.",
+    "display_order": 2
+  },
+  "cover_image": "https://source.unsplash.com/1600x900/?yacht,luxury",
+  "base_price": "2900000",
+  "discount_percentage": 0,
+  "final_price": 2900000,
+  "discount_amount": 0,
+  "currency": "KRW",
+  "duration_minutes": 150,
+  "min_pax": 2,
+  "max_pax": 6,
+  "available_from": null,
+  "available_to": null,
+  "status": "active",
+  "is_featured": false,
+  "rating_avg": "0.00",
+  "rating_count": 0,
+  "content_html": "",
+  "description_en": "",
+  "cancellation_policy": "",
+  "advance_booking_days": 3,
+  "media": [
+    {
+      "id": 4,
+      "type": "image",
+      "src": "https://source.unsplash.com/1600x900/?yacht,luxury",
+      "display_order": 0,
+      "alt_text": "부산 심야 요트 & 샴페인",
+      "is_cover": true
+    }
+  ],
+  "options": [],
+  "tags": [
+    {
+      "id": 1,
+      "code": "luxury",
+      "name_ko": "럭셔리"
+    },
+    {
+      "id": 3,
+      "code": "romance",
+      "name_ko": "로맨틱"
+    },
+    {
+      "id": 6,
+      "code": "private",
+      "name_ko": "프라이빗"
+    }
+  ],
+  "vendor": {
+    "id": 2,
+    "name": "부산 블루 마리나"
+  },
+  "seo_meta_title": "",
+  "seo_meta_description": "",
+  "published_at": "2026-04-25T14:39:03.000862+09:00"
+}

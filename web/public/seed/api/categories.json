@@ -1,0 +1,70 @@
+{
+  "count": 7,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 1,
+      "code": "supercar",
+      "name_ko": "슈퍼카",
+      "name_en": "Supercar",
+      "icon": "car",
+      "description": "람보르기니·페라리·맥라렌 등 프리미엄 드라이브 세션.",
+      "display_order": 1
+    },
+    {
+      "id": 2,
+      "code": "yacht",
+      "name_ko": "요트",
+      "name_en": "Yacht",
+      "icon": "anchor",
+      "description": "프라이빗 요트 차터 · 선셋 · 디너.",
+      "display_order": 2
+    },
+    {
+      "id": 3,
+      "code": "equestrian",
+      "name_ko": "프라이빗 외승",
+      "name_en": "Private Equestrian",
+      "icon": "horse",
+      "description": "자연 속 프리미엄 야외 승마 세션.",
+      "display_order": 3
+    },
+    {
+      "id": 4,
+      "code": "kpop",
+      "name_ko": "K-pop 컬처",
+      "name_en": "K-pop Culture",
+      "icon": "music",
+      "description": "한국 엔터테인먼트 산업의 현장 — 스튜디오·레코딩·안무 세션.",
+      "display_order": 4
+    },
+    {
+      "id": 5,
+      "code": "sports",
+      "name_ko": "스포츠",
+      "name_en": "Sports",
+      "icon": "trophy",
+      "description": "프라이빗 레슨·관람·투어링 — 골프·테니스·서핑 중심.",
+      "display_order": 5
+    },
+    {
+      "id": 6,
+      "code": "drive",
+      "name_ko": "드라이브",
+      "name_en": "Scenic Drive",
+      "icon": "road",
+      "description": "라이프스타일 드라이브 — 루트 큐레이션과 사진 포인트 포함.",
+      "display_order": 6
+    },
+    {
+      "id": 7,
+      "code": "food",
+      "name_ko": "음식",
+      "name_en": "Gastronomy",
+      "icon": "utensils",
+      "description": "프라이빗 다이닝·파인 쿠킹 클래스·셰프 동행 마켓 투어링.",
+      "display_order": 7
+    }
+  ]
+}

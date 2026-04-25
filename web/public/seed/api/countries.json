@@ -1,0 +1,49 @@
+{
+  "count": 6,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "code": "KR",
+      "name_ko": "한국",
+      "name_en": "Korea",
+      "is_active": true,
+      "display_order": 1
+    },
+    {
+      "code": "JP",
+      "name_ko": "일본",
+      "name_en": "Japan",
+      "is_active": false,
+      "display_order": 2
+    },
+    {
+      "code": "CN",
+      "name_ko": "중국",
+      "name_en": "China",
+      "is_active": false,
+      "display_order": 3
+    },
+    {
+      "code": "US",
+      "name_ko": "미국",
+      "name_en": "United States",
+      "is_active": false,
+      "display_order": 4
+    },
+    {
+      "code": "FR",
+      "name_ko": "프랑스",
+      "name_en": "France",
+      "is_active": false,
+      "display_order": 5
+    },
+    {
+      "code": "IT",
+      "name_ko": "이탈리아",
+      "name_en": "Italy",
+      "is_active": false,
+      "display_order": 6
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "id": 1,
+  "slug": "lamborghini-seoul-urban-drive",
+  "title_ko": "람보르기니 서울 도심 드라이브",
+  "title_en": "Lamborghini Seoul Urban Drive",
+  "subtitle_ko": "강남에서 한남까지, 도시의 심장을 지나는 두 시간",
+  "description_ko": "검정 람보르기니 우라칸 또는 우라칸 스파이더로 강남 · 한남 · 남산을 순회하는 프라이빗 드라이빙 세션. 인증 드라이버 옵션 포함. 촬영 옵션 선택 가능.",
+  "region": {
+    "id": 1,
+    "code": "seoul",
+    "name_ko": "서울",
+    "name_en": "Seoul",
+    "lat": "37.566500",
+    "lng": "126.978000",
+    "country": {
+      "code": "KR",
+      "name_ko": "한국",
+      "name_en": "Korea",
+      "is_active": true,
+      "display_order": 1
+    },
+    "is_active": true
+  },
+  "category": {
+    "id": 1,
+    "code": "supercar",
+    "name_ko": "슈퍼카",
+    "name_en": "Supercar",
+    "icon": "car",
+    "description": "람보르기니·페라리·맥라렌 등 프리미엄 드라이브 세션.",
+    "display_order": 1
+  },
+  "cover_image": "https://source.unsplash.com/1600x900/?supercar,luxury",
+  "base_price": "2800000",
+  "discount_percentage": 0,
+  "final_price": 2800000,
+  "discount_amount": 0,
+  "currency": "KRW",
+  "duration_minutes": 120,
+  "min_pax": 1,
+  "max_pax": 2,
+  "available_from": null,
+  "available_to": null,
+  "status": "active",
+  "is_featured": true,
+  "rating_avg": "0.00",
+  "rating_count": 0,
+  "content_html": "",
+  "description_en": "",
+  "cancellation_policy": "",
+  "advance_booking_days": 3,
+  "media": [
+    {
+      "id": 1,
+      "type": "image",
+      "src": "https://source.unsplash.com/1600x900/?supercar,luxury",
+      "display_order": 0,
+      "alt_text": "람보르기니 서울 도심 드라이브",
+      "is_cover": true
+    }
+  ],
+  "options": [],
+  "tags": [
+    {
+      "id": 1,
+      "code": "luxury",
+      "name_ko": "럭셔리"
+    },
+    {
+      "id": 2,
+      "code": "thrill",
+      "name_ko": "짜릿함"
+    },
+    {
+      "id": 6,
+      "code": "private",
+      "name_ko": "프라이빗"
+    }
+  ],
+  "vendor": {
+    "id": 1,
+    "name": "서울 프리미엄 오토"
+  },
+  "seo_meta_title": "",
+  "seo_meta_description": "",
+  "published_at": "2026-04-25T14:39:02.997379+09:00"
+}

@@ -55,7 +55,7 @@ QUESTIONS = [
         'options': [
             {'code': 'calm', 'label': '정적 · 스파 · 다이닝 · 아트', 'weights': {'D': 2, 'N': 1}},
             {'code': 'active', 'label': '동적 · 드라이브 · 요트 · 승마', 'weights': {'T': 2}},
-            {'code': 'mix', 'label': '둘의 균형', 'weights': {'R': 1, 'D': 1}},
+            {'code': 'mix', 'label': '정적과 동적의 균형', 'weights': {'R': 1, 'D': 1}},
             {'code': 'pure_luxe', 'label': '순수 럭셔리 · 단지 머물기만', 'weights': {'N': 2}},
         ],
     },

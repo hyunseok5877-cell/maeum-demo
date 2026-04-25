@@ -1,0 +1,102 @@
+{
+  "id": 2,
+  "slug": "ferrari-sunset-namsan",
+  "title_ko": "페라리 선셋 남산 루트",
+  "title_en": "Ferrari Sunset Namsan Route",
+  "subtitle_ko": "해가 도시를 물들이는 시간에 도시를 가로지르는 붉은 경험",
+  "description_ko": "페라리 로마 혹은 포르토피노로 선셋 타이밍에 한남–남산–동작대교–반포대교를 순회합니다. 포토그래퍼 동행 옵션.",
+  "region": {
+    "id": 1,
+    "code": "seoul",
+    "name_ko": "서울",
+    "name_en": "Seoul",
+    "lat": "37.566500",
+    "lng": "126.978000",
+    "country": {
+      "code": "KR",
+      "name_ko": "한국",
+      "name_en": "Korea",
+      "is_active": true,
+      "display_order": 1
+    },
+    "is_active": true
+  },
+  "category": {
+    "id": 1,
+    "code": "supercar",
+    "name_ko": "슈퍼카",
+    "name_en": "Supercar",
+    "icon": "car",
+    "description": "람보르기니·페라리·맥라렌 등 프리미엄 드라이브 세션.",
+    "display_order": 1
+  },
+  "cover_image": "https://source.unsplash.com/1600x900/?supercar,luxury",
+  "base_price": "3200000",
+  "discount_percentage": 15,
+  "final_price": 2720000,
+  "discount_amount": 480000,
+  "currency": "KRW",
+  "duration_minutes": 150,
+  "min_pax": 1,
+  "max_pax": 2,
+  "available_from": null,
+  "available_to": null,
+  "status": "active",
+  "is_featured": true,
+  "rating_avg": "0.00",
+  "rating_count": 0,
+  "content_html": "\n<h2>해가 도시를 물들이는 시간</h2>\n<p>붉은 페라리 로마 또는 포르토피노 한 대를 준비합니다. <strong>한남대교</strong>를 건너 <em>남산</em>의 능선을 올라 한강의 동쪽 — 동작대교로 이어지는 2시간 30분의 프라이빗 드라이빙 세션입니다.</p>\n<p>해가 내려앉는 <span style=\"color:#b26a00;\">황금빛 시간대</span>에 촬영 동선이 최적화되어 있으며, 원하시면 전담 포토그래퍼가 동승하여 기억의 한 장면을 남겨드립니다.</p>\n<h3>포함 사항</h3>\n<ul><li>인증 드라이버 1명</li><li>생수·차가운 물수건</li><li>실시간 교통 라우팅</li></ul>\n<h3>추가 옵션</h3>\n<ul><li>포토그래퍼 동행 (2시간 · 편집본 30컷)</li><li>남산 팔각정 선셋 테라스 예약</li><li>종료 후 한남동 미쉐린 레스토랑 안내</li></ul>\n<hr>\n<p><strong>주의</strong> · 페라리 전용 보험 및 자차 면책금은 차량 조건에 따라 달라집니다. 예약 시 상세 안내드립니다.</p>\n",
+  "description_en": "",
+  "cancellation_policy": "• 7일 전 취소: 전액 환불\n• 3~6일 전 취소: 70%\n• 1~2일 전 취소: 30%\n• 당일 취소: 환불 불가 (악천후·안전 사유 제외)",
+  "advance_booking_days": 3,
+  "media": [
+    {
+      "id": 2,
+      "type": "image",
+      "src": "https://source.unsplash.com/1600x900/?supercar,luxury",
+      "display_order": 0,
+      "alt_text": "페라리 선셋 남산 루트",
+      "is_cover": true
+    }
+  ],
+  "options": [
+    {
+      "id": 1,
+      "name": "전담 포토그래퍼 동행",
+      "description": "편집본 30컷 이상 · 2~3시간 · 개인 사용 전용",
+      "additional_price": "800000",
+      "max_quantity": 1
+    },
+    {
+      "id": 2,
+      "name": "남산 팔각정 선셋 테라스",
+      "description": "프라이빗 테이블 예약 + 샴페인 1병",
+      "additional_price": "400000",
+      "max_quantity": 1
+    }
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "code": "luxury",
+      "name_ko": "럭셔리"
+    },
+    {
+      "id": 2,
+      "code": "thrill",
+      "name_ko": "짜릿함"
+    },
+    {
+      "id": 5,
+      "code": "sunset",
+      "name_ko": "선셋"
+    }
+  ],
+  "vendor": {
+    "id": 1,
+    "name": "서울 프리미엄 오토"
+  },
+  "seo_meta_title": "",
+  "seo_meta_description": "",
+  "published_at": "2026-04-25T14:39:02.998855+09:00"
+}

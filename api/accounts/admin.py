@@ -1,6 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import User, UserProfile, MembershipTier, Membership, Curator, AuditLog
+from .models import (
+    User, UserProfile, MembershipTier, Membership, Curator, AuditLog,
+    SocialIdentity, MemberIntakeSurvey,
+)
 
 
 @admin.register(User)
@@ -48,3 +51,53 @@ class AuditLogAdmin(admin.ModelAdmin):
     list_filter = ('action', 'entity_type')
     search_fields = ('entity_type', 'entity_id')
     readonly_fields = tuple(f.name for f in AuditLog._meta.fields)
+
+
+@admin.register(SocialIdentity)
+class SocialIdentityAdmin(admin.ModelAdmin):
+    list_display = ('user', 'provider', 'provider_uid', 'email_at_signup', 'created_at')
+    list_filter = ('provider',)
+    search_fields = ('user__email', 'provider_uid', 'email_at_signup', 'raw_name')
+    autocomplete_fields = ('user',)
+
+
+@admin.register(MemberIntakeSurvey)
+class MemberIntakeSurveyAdmin(admin.ModelAdmin):
+    list_display = (
+        'user', 'full_name', 'age_range', 'residence_city',
+        'marital_status', 'annual_income_range', 'asset_range',
+        'budget_per_experience', 'consent_privacy', 'completed_at',
+    )
+    list_filter = (
+        'age_range', 'marital_status', 'annual_income_range',
+        'asset_range', 'budget_per_experience', 'referral_source',
+        'consent_privacy', 'consent_marketing',
+    )
+    search_fields = ('user__email', 'full_name', 'occupation', 'company')
+    autocomplete_fields = ('user',)
+    filter_horizontal = ('preferred_categories',)
+    fieldsets = (
+        ('연결', {'fields': ('user', 'full_name', 'completed_at')}),
+        ('기본 정보', {
+            'fields': ('age_range', 'residence_city', 'residence_district')
+        }),
+        ('직업·가정', {
+            'fields': ('occupation', 'company', 'marital_status')
+        }),
+        ('🔒 민감 — 자산·소득', {
+            'fields': ('annual_income_range', 'asset_range'),
+            'classes': ('collapse',),
+        }),
+        ('선호', {
+            'fields': ('preferred_categories', 'budget_per_experience', 'preferred_months')
+        }),
+        ('동행·특별 일정', {
+            'fields': ('companion_types', 'special_occasions')
+        }),
+        ('유입', {
+            'fields': ('referral_source', 'referral_detail')
+        }),
+        ('동의', {
+            'fields': ('consent_privacy', 'consent_marketing', 'consent_profiling')
+        }),
+    )

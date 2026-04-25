@@ -1,3 +1,4 @@
+const isDemo = process.env.NEXT_PUBLIC_DEMO === "1";
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:8000/api";
 
 export interface RegionSummary {
@@ -85,6 +86,19 @@ export interface ExperienceDetail extends ExperienceCard {
   published_at: string | null;
 }
 
+// Demo 모드: 빌드 시 public/seed/api/*.json 을 fs 로 읽음.
+async function readSeed<T>(file: string): Promise<T | null> {
+  try {
+    const fs = await import("node:fs/promises");
+    const path = await import("node:path");
+    const p = path.join(process.cwd(), "public", "seed", "api", file);
+    const raw = await fs.readFile(p, "utf8");
+    return JSON.parse(raw) as T;
+  } catch {
+    return null;
+  }
+}
+
 async function fetchJson<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
     next: { revalidate: 60 },
@@ -97,6 +111,10 @@ async function fetchJson<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export async function getFeaturedExperiences(): Promise<ExperienceCard[]> {
+  if (isDemo) {
+    const d = await readSeed<{ results: ExperienceCard[] }>("featured.json");
+    return d?.results ?? [];
+  }
   try {
     const data = await fetchJson<{ results: ExperienceCard[] }>("/experiences/featured/");
     return data.results ?? [];
@@ -109,6 +127,13 @@ export async function getAllExperiences(filter?: {
   region?: string;
   category?: string;
 }): Promise<ExperienceCard[]> {
+  if (isDemo) {
+    const d = await readSeed<{ results: ExperienceCard[] }>("experiences.json");
+    let list = d?.results ?? [];
+    if (filter?.region) list = list.filter((e) => e.region?.code === filter.region);
+    if (filter?.category) list = list.filter((e) => e.category?.code === filter.category);
+    return list;
+  }
   try {
     const qs = new URLSearchParams({ ordering: "-is_featured,-published_at" });
     if (filter?.region) qs.set("region__code", filter.region);
@@ -123,6 +148,10 @@ export async function getAllExperiences(filter?: {
 }
 
 export async function getRegions(): Promise<RegionSummary[]> {
+  if (isDemo) {
+    const d = await readSeed<{ results: RegionSummary[] } | RegionSummary[]>("regions.json");
+    return Array.isArray(d) ? d : d?.results ?? [];
+  }
   try {
     const data = await fetchJson<{ results: RegionSummary[] } | RegionSummary[]>(
       "/experiences/regions/"
@@ -134,6 +163,10 @@ export async function getRegions(): Promise<RegionSummary[]> {
 }
 
 export async function getCategories(): Promise<CategorySummary[]> {
+  if (isDemo) {
+    const d = await readSeed<{ results: CategorySummary[] } | CategorySummary[]>("categories.json");
+    return Array.isArray(d) ? d : d?.results ?? [];
+  }
   try {
     const data = await fetchJson<{ results: CategorySummary[] } | CategorySummary[]>(
       "/experiences/categories/"
@@ -153,6 +186,10 @@ export interface CountrySummary {
 }
 
 export async function getCountries(): Promise<CountrySummary[]> {
+  if (isDemo) {
+    const d = await readSeed<{ results: CountrySummary[] } | CountrySummary[]>("countries.json");
+    return Array.isArray(d) ? d : d?.results ?? [];
+  }
   try {
     const data = await fetchJson<{ results: CountrySummary[] } | CountrySummary[]>(
       "/experiences/countries/"
@@ -164,6 +201,9 @@ export async function getCountries(): Promise<CountrySummary[]> {
 }
 
 export async function getExperienceBySlug(slug: string): Promise<ExperienceDetail | null> {
+  if (isDemo) {
+    return await readSeed<ExperienceDetail>(`experiences/${slug}.json`);
+  }
   try {
     return await fetchJson<ExperienceDetail>(`/experiences/${slug}/`);
   } catch {
