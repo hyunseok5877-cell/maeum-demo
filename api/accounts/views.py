@@ -374,6 +374,7 @@ def my_profile(request):
                 'name_ko': pt.name_ko,
                 'name_en': pt.name_en,
                 'description': pt.description,
+                'image_url': pt.image_url,
             }
             from curation.models import PersonalityTestSession
             last_session = (

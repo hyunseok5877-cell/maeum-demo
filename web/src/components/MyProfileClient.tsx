@@ -29,6 +29,7 @@ type Profile = {
     name_ko: string;
     name_en: string;
     description: string;
+    image_url?: string;
   } | null;
   stats: {
     total_experiences: number;
@@ -375,37 +376,69 @@ export function MyProfileClient() {
         </div>
       </div>
 
-      {/* 성향 유형 */}
+      {/* 성향 유형 — 좌 이미지 / 우 텍스트 */}
       {data.personality_type && (
         <div
-          className="mb-14 p-8 md:p-12 rounded-[24px]"
+          className="mb-14 rounded-[24px] overflow-hidden grid grid-cols-1 md:grid-cols-[42%_1fr]"
           style={{
             background:
               "linear-gradient(135deg, #0F0F0F 0%, #2B2420 100%)",
             color: "#FAFAF8",
           }}
         >
-          <p
-            className="caption"
-            style={{ color: "var(--color-brass)" }}
+          {/* 좌측 이미지 */}
+          <div
+            className="relative min-h-[260px] md:min-h-[360px]"
+            style={{
+              backgroundImage: data.personality_type.image_url
+                ? `url(${data.personality_type.image_url})`
+                : "linear-gradient(135deg, #2B2420 0%, #0F0F0F 100%)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
           >
-            — Votre type
-          </p>
-          <h3
-            className="mt-3 font-[family-name:var(--font-display)]"
-            style={{ fontSize: "clamp(28px, 3.5vw, 44px)", lineHeight: 1.15 }}
-          >
-            {data.personality_type.name_ko}
-          </h3>
-          <p className="mt-2 caption" style={{ opacity: 0.7 }}>
-            {data.personality_type.name_en}
-          </p>
-          <p
-            className="mt-6 max-w-2xl text-[15px]"
-            style={{ lineHeight: 1.75, opacity: 0.88 }}
-          >
-            {data.personality_type.description}
-          </p>
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(90deg, rgba(15,15,15,0) 0%, rgba(15,15,15,0.55) 75%, #1A1612 100%)",
+              }}
+              aria-hidden
+            />
+            <div className="absolute bottom-5 left-6">
+              <p
+                className="caption"
+                style={{ color: "var(--color-brass)", letterSpacing: "0.22em" }}
+              >
+                {data.personality_type.code}
+              </p>
+            </div>
+          </div>
+
+          {/* 우측 텍스트 */}
+          <div className="p-8 md:p-12">
+            <p
+              className="caption"
+              style={{ color: "var(--color-brass)" }}
+            >
+              — Votre type
+            </p>
+            <h3
+              className="mt-3 font-[family-name:var(--font-display)]"
+              style={{ fontSize: "clamp(28px, 3.5vw, 44px)", lineHeight: 1.15 }}
+            >
+              {data.personality_type.name_ko}
+            </h3>
+            <p className="mt-2 caption" style={{ opacity: 0.7 }}>
+              {data.personality_type.name_en}
+            </p>
+            <p
+              className="mt-6 text-[15px]"
+              style={{ lineHeight: 1.75, opacity: 0.88 }}
+            >
+              {data.personality_type.description}
+            </p>
+          </div>
         </div>
       )}
 

@@ -96,6 +96,7 @@ PERSONALITY_TYPES = [
         'code': 'NOCTURNE_LUXE',
         'name_ko': '야행성 럭셔리파',
         'name_en': 'Nocturne Luxe',
+        'image_url': 'https://images.unsplash.com/photo-1519222970733-f546218fa6d7?w=900&q=85&auto=format',
         'description': (
             '해가 진 뒤 빛나는 도시에서 당신의 밤을 설계하는 사람. '
             '낮의 분주함보다 야경·조도·정적이 흐르는 공간에서 진짜 자기다움을 느끼는군요. '
@@ -111,6 +112,7 @@ PERSONALITY_TYPES = [
         'code': 'DAWN_HEAL',
         'name_ko': '새벽의 정원사',
         'name_en': 'Dawn Healer',
+        'image_url': 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=900&q=85&auto=format',
         'description': (
             '고요한 아침, 자연이 먼저 깨어나는 순간을 선호하는 사람. '
             '시끄러운 자극보다 호흡이 깊어지는 시간 속에서 자신을 회복하는 분이에요. '
@@ -124,6 +126,7 @@ PERSONALITY_TYPES = [
         'code': 'THRILL_RIDER',
         'name_ko': '드라이브 스릴 시커',
         'name_en': 'Thrill Rider',
+        'image_url': 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=85&auto=format',
         'description': (
             '속도와 몰입이 주는 아드레날린 — 짜릿한 몇 시간의 지배자. '
             '안락한 정적보다 심장이 뛰는 강렬한 자극에서 가장 자기다움을 느끼는 분이에요. '
@@ -137,6 +140,7 @@ PERSONALITY_TYPES = [
         'code': 'ROMANCE_ARCHITECT',
         'name_ko': '로맨스 설계자',
         'name_en': 'Romance Architect',
+        'image_url': 'https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=900&q=85&auto=format',
         'description': (
             '특별한 사람과 단 한 번뿐인 순간을 연출하고 싶은 사람. '
             '로맨스를 중시하고 관계의 깊이와 정서적 의미를 가장 큰 가치로 여기는 분이에요. '
