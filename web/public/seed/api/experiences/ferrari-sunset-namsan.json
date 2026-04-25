@@ -30,7 +30,7 @@
     "description": "람보르기니·페라리·맥라렌 등 프리미엄 드라이브 세션.",
     "display_order": 1
   },
-  "cover_image": "https://source.unsplash.com/1600x900/?supercar,luxury",
+  "cover_image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=85&auto=format",
   "base_price": "3200000",
   "discount_percentage": 15,
   "final_price": 2720000,
@@ -56,7 +56,7 @@
     {
       "id": 2,
       "type": "image",
-      "src": "https://source.unsplash.com/1600x900/?supercar,luxury",
+      "src": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=85&auto=format",
       "display_order": 0,
       "alt_text": "페라리 선셋 남산 루트",
       "is_cover": true
@@ -101,5 +101,5 @@
   },
   "seo_meta_title": "",
   "seo_meta_description": "",
-  "published_at": "2026-04-25T15:35:37.595365+09:00"
+  "published_at": "2026-04-25T15:42:05.198034+09:00"
 }

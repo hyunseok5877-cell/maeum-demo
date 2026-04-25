@@ -335,12 +335,31 @@ class Command(BaseCommand):
             )
             if tag_codes:
                 exp.tags.set(Tag.objects.filter(code__in=tag_codes))
-            # 대표 이미지 1장 더미 (Unsplash)
-            if not exp.media.exists():
+            # 대표 이미지 1장 — slug 별 고정 (deprecated source.unsplash.com 회피)
+            COVER_BY_SLUG = {
+                'lamborghini-seoul-urban-drive': 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1600&q=85&auto=format',
+                'ferrari-sunset-namsan': 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=85&auto=format',
+                'busan-haeundae-private-yacht-sunset': 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1600&q=85&auto=format',
+                'busan-night-yacht-champagne': 'https://images.unsplash.com/photo-1493558103817-58b2924bce98?w=1600&q=85&auto=format',
+                'kpop-seoul-private-studio-session': 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1600&q=85&auto=format',
+                'jeju-private-equestrian-oreum': 'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=1600&q=85&auto=format',
+                'jeju-beach-equestrian-sunset': 'https://images.unsplash.com/photo-1450052590821-8bf91254a353?w=1600&q=85&auto=format',
+            }
+            cover_url = COVER_BY_SLUG.get(
+                exp.slug,
+                f'https://picsum.photos/seed/{exp.slug}/1600/900',
+            )
+            # 기존 깨진 source.unsplash.com 미디어가 있으면 갱신
+            existing = exp.media.filter(is_cover=True).first()
+            if existing:
+                if 'source.unsplash.com' in (existing.url or ''):
+                    existing.url = cover_url
+                    existing.save(update_fields=['url'])
+            else:
                 ExperienceMedia.objects.create(
                     experience=exp,
                     type='image',
-                    url=f'https://source.unsplash.com/1600x900/?{category.name_en.lower()},luxury',
+                    url=cover_url,
                     display_order=0,
                     alt_text=exp.title_ko,
                     is_cover=True,

@@ -30,7 +30,7 @@
     "description": "프라이빗 요트 차터 · 선셋 · 디너.",
     "display_order": 2
   },
-  "cover_image": "https://source.unsplash.com/1600x900/?yacht,luxury",
+  "cover_image": "https://images.unsplash.com/photo-1493558103817-58b2924bce98?w=1600&q=85&auto=format",
   "base_price": "2900000",
   "discount_percentage": 0,
   "final_price": 2900000,
@@ -56,7 +56,7 @@
     {
       "id": 4,
       "type": "image",
-      "src": "https://source.unsplash.com/1600x900/?yacht,luxury",
+      "src": "https://images.unsplash.com/photo-1493558103817-58b2924bce98?w=1600&q=85&auto=format",
       "display_order": 0,
       "alt_text": "부산 심야 요트 & 샴페인",
       "is_cover": true
@@ -86,5 +86,5 @@
   },
   "seo_meta_title": "",
   "seo_meta_description": "",
-  "published_at": "2026-04-25T15:35:37.597542+09:00"
+  "published_at": "2026-04-25T15:42:05.200464+09:00"
 }

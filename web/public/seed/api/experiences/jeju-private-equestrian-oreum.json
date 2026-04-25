@@ -30,7 +30,7 @@
     "description": "자연 속 프리미엄 야외 승마 세션.",
     "display_order": 3
   },
-  "cover_image": "https://source.unsplash.com/1600x900/?private equestrian,luxury",
+  "cover_image": "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=1600&q=85&auto=format",
   "base_price": "1800000",
   "discount_percentage": 0,
   "final_price": 1800000,
@@ -56,7 +56,7 @@
     {
       "id": 5,
       "type": "image",
-      "src": "https://source.unsplash.com/1600x900/?private equestrian,luxury",
+      "src": "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=1600&q=85&auto=format",
       "display_order": 0,
       "alt_text": "제주 오름 프라이빗 외승",
       "is_cover": true
@@ -81,5 +81,5 @@
   },
   "seo_meta_title": "",
   "seo_meta_description": "",
-  "published_at": "2026-04-25T15:35:37.599780+09:00"
+  "published_at": "2026-04-25T15:42:05.203015+09:00"
 }

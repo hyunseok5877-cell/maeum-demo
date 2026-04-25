@@ -32,7 +32,7 @@
         "description": "프라이빗 요트 차터 · 선셋 · 디너.",
         "display_order": 2
       },
-      "cover_image": "https://source.unsplash.com/1600x900/?yacht,luxury",
+      "cover_image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1600&q=85&auto=format",
       "base_price": "2400000",
       "discount_percentage": 0,
       "final_price": 2400000,
@@ -83,7 +83,7 @@
         "description": "자연 속 프리미엄 야외 승마 세션.",
         "display_order": 3
       },
-      "cover_image": "https://source.unsplash.com/1600x900/?private equestrian,luxury",
+      "cover_image": "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=1600&q=85&auto=format",
       "base_price": "1800000",
       "discount_percentage": 0,
       "final_price": 1800000,
@@ -134,7 +134,7 @@
         "description": "프라이빗 요트 차터 · 선셋 · 디너.",
         "display_order": 2
       },
-      "cover_image": "https://source.unsplash.com/1600x900/?yacht,luxury",
+      "cover_image": "https://images.unsplash.com/photo-1493558103817-58b2924bce98?w=1600&q=85&auto=format",
       "base_price": "2900000",
       "discount_percentage": 0,
       "final_price": 2900000,

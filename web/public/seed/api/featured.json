@@ -32,7 +32,7 @@
         "description": "람보르기니·페라리·맥라렌 등 프리미엄 드라이브 세션.",
         "display_order": 1
       },
-      "cover_image": "https://source.unsplash.com/1600x900/?supercar,luxury",
+      "cover_image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&q=85&auto=format",
       "base_price": "3200000",
       "discount_percentage": 15,
       "final_price": 2720000,
@@ -83,7 +83,7 @@
         "description": "람보르기니·페라리·맥라렌 등 프리미엄 드라이브 세션.",
         "display_order": 1
       },
-      "cover_image": "https://source.unsplash.com/1600x900/?supercar,luxury",
+      "cover_image": "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1600&q=85&auto=format",
       "base_price": "2800000",
       "discount_percentage": 0,
       "final_price": 2800000,
@@ -134,7 +134,7 @@
         "description": "프라이빗 요트 차터 · 선셋 · 디너.",
         "display_order": 2
       },
-      "cover_image": "https://source.unsplash.com/1600x900/?yacht,luxury",
+      "cover_image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1600&q=85&auto=format",
       "base_price": "2400000",
       "discount_percentage": 0,
       "final_price": 2400000,
@@ -185,7 +185,7 @@
         "description": "자연 속 프리미엄 야외 승마 세션.",
         "display_order": 3
       },
-      "cover_image": "https://source.unsplash.com/1600x900/?private equestrian,luxury",
+      "cover_image": "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=1600&q=85&auto=format",
       "base_price": "1800000",
       "discount_percentage": 0,
       "final_price": 1800000,
@@ -236,7 +236,7 @@
         "description": "한국 엔터테인먼트 산업의 현장 — 스튜디오·레코딩·안무 세션.",
         "display_order": 4
       },
-      "cover_image": "https://source.unsplash.com/1600x900/?k-pop culture,luxury",
+      "cover_image": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1600&q=85&auto=format",
       "base_price": "3500000",
       "discount_percentage": 0,
       "final_price": 3500000,

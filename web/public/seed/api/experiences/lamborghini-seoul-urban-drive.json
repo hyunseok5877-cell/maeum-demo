@@ -30,7 +30,7 @@
     "description": "람보르기니·페라리·맥라렌 등 프리미엄 드라이브 세션.",
     "display_order": 1
   },
-  "cover_image": "https://source.unsplash.com/1600x900/?supercar,luxury",
+  "cover_image": "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1600&q=85&auto=format",
   "base_price": "2800000",
   "discount_percentage": 0,
   "final_price": 2800000,
@@ -56,7 +56,7 @@
     {
       "id": 1,
       "type": "image",
-      "src": "https://source.unsplash.com/1600x900/?supercar,luxury",
+      "src": "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1600&q=85&auto=format",
       "display_order": 0,
       "alt_text": "람보르기니 서울 도심 드라이브",
       "is_cover": true
@@ -86,5 +86,5 @@
   },
   "seo_meta_title": "",
   "seo_meta_description": "",
-  "published_at": "2026-04-25T15:35:37.592533+09:00"
+  "published_at": "2026-04-25T15:42:05.194878+09:00"
 }
